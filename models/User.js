@@ -46,9 +46,7 @@ let User = db.define('user', {
         }
     },
     {
-        freezeTableName: true
-    },
-    {
+        freezeTableName: true,
         timestamps: false
     }
 );

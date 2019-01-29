@@ -70,20 +70,17 @@ let Post = db.define('posts_assholedesign_40', {
             type: db._Sequelize.INTEGER,
             allowNull: false
         },
-        last_updated: {
-            type: db._Sequelize.STRING,
+        lastupdated: {
+            type: db._Sequelize.TIME,
             allowNull: false
         },
         random: {
             type: db._Sequelize.DOUBLE,
             allowNull: false
         },
-
     },
     {
-        freezeTableName: true
-    },
-    {
+        freezeTableName: true,
         timestamps: false
     }
 );
