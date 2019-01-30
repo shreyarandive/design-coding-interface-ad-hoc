@@ -5,6 +5,7 @@ let Controller = require('../controllers/UserController');
 let router = express.Router();
 
 router.get('/', Controller.loadMainPage.get);
+router.get('/comment-analysis/:post_count', Controller.loadMainPage.get);
 //router.get('/page/:page_number', Controller.login.get);
 //router.post('/login', Controller.login.post);
 //router.get('/:id/find-profile-by-id', Controller.findProfileById.get);
