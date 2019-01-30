@@ -4,35 +4,44 @@ let Comment = require('../models/Comment');
 let Post = require('../models/Post');
 let checkUtil = require('../utils/checkUtil');
 let db = require('../db');
-let counter = -1;
+let pageCount;
 
 module.exports = {
     loadMainPage: {
         get: function (req, res) {
 
-            counter++;
+            //check if post_count is a valid number using check util
+            console.log(req.params.page_count);
+            pageCount= Number(req.params.page_count);
 
-            Post.findOne({offset: Number(req.params.post_count), limit: 1})
+            Post.findOne({offset: pageCount, limit: 1})
 
                 .then(single_post => {
                     Comment
                         .findAll({  where: {post_id: single_post.post_id},
-                                            attributes: ['message']})
+                                            attributes: ['message', 'post_id']})
 
                         .then(comments_for_one_post => {
+
                             let response = {
+                                prev_page: pageCount - 1,
+                                next_page: pageCount + 1,
                                 data: comments_for_one_post,
                             };
-                            res.send(response);
+                            res.render('index', {post_data: response});
+                            //res.send(response);
                         })
 
                         .catch(err => {
 
                             console.log("Error Comments: " + err);
+
                             let response = {
                                 status_code: 500,
                                 msg: 'comment fetching error'
                             };
+
+                            res.send(response);
                         })
                 })
 
@@ -42,10 +51,20 @@ module.exports = {
                         status_code: 500,
                         msg: 'fetching post error'
                     };
+
+                    res.send(response);
                 });
         },
 
         post(req, res) {
+
+        }
+    },
+
+    redirectTo:{
+        get: function (){
+            console.log("hereeeeeee");
+            this.loadMainPage.get();
         }
     }
 };

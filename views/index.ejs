@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Comments Analysis</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+  <!--<li><a href="#/<% locals.post_data.next_page %>">Change branch </a></li>-->
+
+    <li><a href="/comment-analysis/<% locals.post_data.next_page %>">Change branch </a></li>
+
+    <p><%= locals.post_data.prev_page%></p>
+    <p><%= locals.post_data.next_page%></p>
+    <% if(locals.post_data.data !== null) { Object.values(locals.post_data.data).forEach(item => { %>
+      <p><%= item.message %></p>
+
+    <%}) } else { %>
+      <p><%= "404 : Data not found" %></p>
+    <% } %>
   </body>
 </html>
