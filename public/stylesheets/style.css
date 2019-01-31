@@ -25,3 +25,6 @@ p{
 
 }
 
+.disable{
+  aria-disabled: true;
+}
