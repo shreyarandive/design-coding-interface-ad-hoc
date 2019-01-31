@@ -19,7 +19,7 @@ module.exports = {
                 .then(single_post => {
                     Comment
                         .findAll({  where: {post_id: single_post.post_id},
-                                            attributes: ['message', 'post_id']})
+                                            attributes: ['message', 'post_id','parent_id','comment_id']})
 
                         .then(comments_for_one_post => {
 
@@ -27,6 +27,7 @@ module.exports = {
                                 prev_page: pageCount - 1,
                                 next_page: pageCount + 1,
                                 data: comments_for_one_post,
+                                post_link: single_post.permalink,
                             };
                             res.render('index', {post_data: response});
                             //res.send(response);

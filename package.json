@@ -9,6 +9,7 @@
     "db:drop:tables": "node ./db_scripts/deleteTables.js"
   },
   "dependencies": {
+    "bootstrap": "^4.2.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^6.2.0",

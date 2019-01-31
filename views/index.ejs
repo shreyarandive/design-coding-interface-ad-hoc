@@ -2,21 +2,67 @@
 <html>
   <head>
     <title>Comments Analysis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
 
-  <!--<li><a href="#/<% locals.post_data.next_page %>">Change branch </a></li>-->
+    <div class="container">
 
-    <li><a href="/comment-analysis/<% locals.post_data.next_page %>">Change branch </a></li>
+      <a class="btn btn-primary button-center" href="/comment-analysis/<%- locals.post_data.prev_page %>">Prev </a>
 
-    <p><%= locals.post_data.prev_page%></p>
-    <p><%= locals.post_data.next_page%></p>
-    <% if(locals.post_data.data !== null) { Object.values(locals.post_data.data).forEach(item => { %>
-      <p><%= item.message %></p>
+      <a class="btn btn-primary" href="https://www.reddit.com/<%- locals.post_data.post_link %>">Open Post </a>
 
-    <%}) } else { %>
-      <p><%= "404 : Data not found" %></p>
-    <% } %>
+      <a class="btn btn-primary" href="/comment-analysis/<%- locals.post_data.next_page %>"
+           disable = "true">Next </a>
+
+
+      <div class="row">
+        <div class="col-md-6">
+
+          <% if(locals.post_data.data !== null) { Object.values(locals.post_data.data).forEach(comment => { %>
+            <p>
+              <%
+                let displayCommentTree=(data, comment_id)=>{
+                  Object.values(data).forEach(comment=>{
+                    if(comment.parent_id.includes(comment_id)){
+                      %><ul><p class="alert alert-dark" ><%= comment.message %><%
+                      displayCommentTree(data, comment.comment_id);
+                      %></p></ul><%
+                    }
+                  })
+                }
+
+                if(comment.post_id==comment.parent_id){
+                  %><p class="alert alert-primary"><%= comment.message %><%
+                  displayCommentTree(locals.post_data.data, comment.comment_id);
+                  %></p><%
+              }%>
+            </p>
+
+          <%}) } else { %>
+            <p><%= "404 : Data not found" %></p>
+          <% } %>
+
+        </div>
+        <div class="col-md-6">
+          <p><p class="alert alert-primary">Questions</p></p>
+        </div>
+      </div>
+
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <a class="btn btn-primary float-left" href="/comment-analysis/<%- locals.post_data.prev_page %>">Prev </a>
+        </div>
+
+        <div class="col-md-6">
+          <a class="btn btn-primary float-right" href="/comment-analysis/<%- locals.post_data.next_page %>">Next </a>
+        </div>
+
+      </div>
+    </div>
+
   </body>
 </html>

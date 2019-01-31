@@ -1,8 +1,27 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 20px 20px 10px 10px;
+  font: 13px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #87cefa20;
 }
 
+.page_nav_btn{
+  padding: 0px 5px 0px 5px;
+  margin-right: 200px;
+}
 a {
   color: #00B7FF;
 }
+ul {
+  border-left: 2px solid black;
+}
+
+p{
+  word-wrap: break-word;
+  padding: 0px 0px 0px 0px;
+}
+
+.button-center{
+  vertical-align: center;
+
+}
+
