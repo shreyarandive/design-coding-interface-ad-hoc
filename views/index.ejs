@@ -18,7 +18,7 @@
                 <a class="btn btn-danger" href="/comment-analysis/<%- locals.post_data.prev_page %>">Prev </a>
             <%}%>
 
-            <a class="btn btn-danger" href="https://www.reddit.com/<%- locals.post_data.post_link %>" target="_blank">Open Post </a>
+            <a class="btn btn-danger" href="https://www.reddit.com/<%- locals.post_data.post_link %>" target="_blank">Open Post</a>
 
             <%if(locals.post_data.next_page >= 40){%>
                 <a class="btn btn-danger disabled"> Next </a>
@@ -31,7 +31,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6 ">
+        <div class="col-7">
 
             <% if(locals.post_data.data !== null) {
                 Object.values(locals.post_data.data)
@@ -59,7 +59,7 @@
                 <% } %>
         </div>
 
-        <div class="col-6">
+        <div class="col-5">
             <p>
             <p class="alert alert-primary">Questions</p></p>
         </div>

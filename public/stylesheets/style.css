@@ -1,13 +1,9 @@
 body {
-  padding: 20px 20px 10px 10px;
+  padding: 20px 0px 0px 0px;
   font: 13px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #87cefa20;
 }
 
-.page_nav_btn{
-  padding: 0px 5px 0px 5px;
-  margin-right: 200px;
-}
 a {
   color: #00B7FF;
 }
@@ -20,11 +16,7 @@ p{
   padding: 0px 0px 0px 0px;
 }
 
-.button-center{
-  vertical-align: center;
-
-}
-
-.disable{
-  aria-disabled: true;
+.row{
+  margin-left: -70px;
+  margin-right: -70px;
 }
