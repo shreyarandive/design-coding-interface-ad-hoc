@@ -16,6 +16,16 @@ p{
   padding: 0px 0px 0px 0px;
 }
 
+.active_background{
+  background-color: #1e90ff60;
+  outline-style: groove;
+  outline-color: yellow;
+}
+
+.not_active_background{
+  background-color: lightskyblue;
+}
+
 .row{
   margin-left: -70px;
   margin-right: -70px;

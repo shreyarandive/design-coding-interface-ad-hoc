@@ -5,67 +5,112 @@ let Post = require('../models/Post');
 let checkUtil = require('../utils/checkUtil');
 let db = require('../db');
 let pageCount;
+let postData;
+let commentIDs = [];
+let totalComments;;
 
 module.exports = {
     loadMainPage: {
         get: function (req, res) {
 
             //check if post_count is a valid number using check util
-            console.log(req.params.page_count);
-            pageCount= Number(req.params.page_count);
+            //console.log(req.params.page_count);
+            pageCount = Number(req.params.page_count);
 
             Post.findOne({offset: pageCount, limit: 1})
 
                 .then(single_post => {
-                    Comment
-                        .findAll({  where: {post_id: single_post.post_id},
-                                            attributes: ['message', 'post_id','parent_id','comment_id']})
 
-                        .then(comments_for_one_post => {
+                    Comment.findAll({
+                            where: {post_id: single_post.post_id},
+                            attributes: ['message', 'post_id', 'parent_id', 'comment_id']
+                            })
 
-                            let response = {
-                                prev_page: pageCount - 1,
-                                next_page: pageCount + 1,
-                                data: comments_for_one_post,
-                                post_link: single_post.permalink,
-                            };
-                            res.render('index', {post_data: response});
-                            //res.send(response);
-                        })
+                            .then(comments_for_one_post => {
 
-                        .catch(err => {
+                                let i;
+                                for(i = 0; comments_for_one_post[i] != null ; i++)
+                                {
+                                    commentIDs.push(comments_for_one_post[i].comment_id);
+                                }
 
-                            console.log("Error Comments: " + err);
+                                totalComments = i;
 
-                            let response = {
-                                status_code: 500,
-                                msg: 'comment fetching error'
-                            };
+                                postData = {
+                                    prev_page: pageCount - 1,
+                                    next_page: pageCount + 1,
+                                    curr_page: pageCount,
+                                    curr_comment: 0,
+                                    tot_comments: totalComments,
+                                    all_comment_ids: commentIDs,
+                                    curr_id: commentIDs[0],
+                                    data: comments_for_one_post,
+                                    post_link: single_post.permalink,
+                                };
+                                res.render('index', {post_data: postData});
+                                console.log(single_post.post_id,commentIDs[0], totalComments);
+                            })
 
-                            res.send(response);
-                        })
-                })
+                            .catch(err => {
 
-                .catch(err => {
-                    console.log("Error post " + err);
-                    let response = {
-                        status_code: 500,
-                        msg: 'fetching post error'
-                    };
+                                console.log("Error Comments: " + err);
 
-                    res.send(response);
-                });
+                                let response = {
+                                    status_code: 500,
+                                    msg: 'comment fetching error'
+                                };
+
+                                res.send(response);
+                            })
+                    })
+
+                    .catch(err => {
+                        console.log("Error post " + err);
+                        let response = {
+                            status_code: 500,
+                            msg: 'fetching post error'
+                        };
+
+                        res.send(response);
+                    });
         },
 
-        post(req, res) {
+        post: function(req, res)
+        {
 
-        }
-    },
+            /*if (checkUtil.isNotEmpty(postData)) {
+                let response = {
+                    status_code: 500,
+                    msg: 'fetching post error',postData
+                };
 
-    redirectTo:{
-        get: function (){
-            console.log("hereeeeeee");
-            this.loadMainPage.get();
-        }
+                res.send(response);
+                return;
+            }*/
+
+            //let curr = Number(req.params.current_comment);
+
+            if (checkUtil.isNotEmpty(req.current_comment)) {
+                let response = {
+                    status_code: 500,
+                    msg: 'error'
+                };
+
+                res.send(response);
+                return;
+            }
+
+            let commentIndex = Number(req.params.current_comment);
+            let commentsArr = postData.data;
+            console.log("Question submitted for comment " + commentsArr[commentIndex]);
+            console.log("Answers " + req.body.gender);
+
+            // TODO Update DB with comment Id and answers
+
+            postData.curr_comment = commentIndex + 1;
+            postData.curr_id = commentIDs[postData.curr_comment];
+            res.render('index', {post_data: postData});
+            console.log(postData.curr_id, postData.curr_comment)
+        },
     }
 };
