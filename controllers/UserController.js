@@ -13,6 +13,8 @@ module.exports = {
     loadMainPage: {
         get: function (req, res) {
 
+            commentIDs = [];
+
             //check if post_count is a valid number using check util
             //console.log(req.params.page_count);
             pageCount = Number(req.params.page_count);

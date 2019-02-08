@@ -82,7 +82,7 @@
         <div class="col-5">
             <p>
             <p class="alert alert-primary">Questions
-            <form class="alert alert-primary" name="question-form" method="POST" action="/comment-analysis/<%- locals.post_data.curr_comment %>">
+            <form class="alert alert-primary" name="question-form" method="POST" action="/comment-analysis/<%- locals.post_data.curr_page %>/<%- locals.post_data.curr_comment %>">
                 <input type="radio" name="gender" value="optionA" checked> Option A<br><br>
                 <input type="radio" name="gender" value="optionB"> Option B<br><br>
                 <input type="radio" name="gender" value="optionC"> Option C<br><br>
