@@ -1,0 +1,32 @@
+<div class="col-7 scrollable_div">
+    <% if(locals.post_data.data !== null) {
+    Object.values(locals.post_data.data).forEach(comment => { %>
+        <p>
+            <% let displayCommentTree = (data, comment_id) => {
+            Object.values(data).forEach(comment => {
+            if(comment.parent_id.includes(comment_id)){
+            if (comment.comment_id === locals.post_data.curr_id) {
+            %> <ul><p class="alert alert-dark active_background"><%= comment.message %>
+            <% displayCommentTree(data, comment.comment_id); %></p></ul><%
+        } else {
+        %><ul><p class="alert alert-dark"><%= comment.message %>
+                <% displayCommentTree(data, comment.comment_id); %></p></ul><%
+                }
+                }
+        })
+        }
+
+        if(comment.post_id == comment.parent_id) {
+        if (comment.comment_id === locals.post_data.curr_id) {
+        %><p class="alert alert-primary active_background"><%= comment.message %>
+            <% displayCommentTree(locals.post_data.data, comment.comment_id); %></p><%
+        } else {
+        %><p class="alert alert-primary"><%= comment.message %>
+            <% displayCommentTree(locals.post_data.data, comment.comment_id); %></p><%
+        }
+        } %>
+        </p>
+    <% }) } else { %>
+        <p><%= "404 : Data not found" %></p>
+    <% } %>
+</div>

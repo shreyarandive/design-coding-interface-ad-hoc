@@ -5,12 +5,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+        });
+    </script>
 </head>
 
 <body>
 
 <div class="container">
-    <div class="row">
+    <div class="row with-margin">
         <div class="col-6 ">
             <%if(locals.post_data.prev_page < 0){%>
                 <a class="btn btn-danger disabled">Prev </a>
@@ -30,66 +36,9 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-7">
-
-            <% if(locals.post_data.data !== null) {
-                var index = 0;
-                Object.values(locals.post_data.data)
-                .forEach(comment => { %>
-                    <p>
-                        <%
-                        let displayCommentTree=(data, comment_id)=>{
-                            Object.values(data).forEach(comment=>{
-                                if(comment.parent_id.includes(comment_id)){
-                                    if (comment.comment_id === locals.post_data.curr_id)
-                                    {
-                                        %><ul><p class="alert alert-dark active_background"><%= comment.message %><%
-                                        displayCommentTree(data, comment.comment_id);
-                                        %></p></ul><%
-                                    }
-                                    else
-                                    {
-                                        %><ul><p class="alert alert-dark"><%= comment.message %><%
-                                        displayCommentTree(data, comment.comment_id);
-                                         %></p></ul><%
-                                    }
-                                }
-                            })
-                        }
-
-                        if(comment.post_id == comment.parent_id)
-                        {
-                            if (comment.comment_id === locals.post_data.curr_id)
-                            {
-                                %><p class="alert alert-primary active_background"><%= comment.message %><%
-                                displayCommentTree(locals.post_data.data, comment.comment_id);
-                                %></p><%
-                            }
-                            else
-                            {
-                                %><p class="alert alert-primary"><%= comment.message %><%
-                                displayCommentTree(locals.post_data.data, comment.comment_id);
-                                %></p><%
-                            }
-                        } %>
-                    </p>
-                <% index++; }) } else { %>
-                    <p><%= "404 : Data not found" %></p>
-                <% } %>
-        </div>
-
-        <div class="col-5">
-            <p>
-            <p class="alert alert-primary">Questions
-            <form class="alert alert-primary" name="question-form" method="POST" action="/comment-analysis/<%- locals.post_data.curr_page %>/<%- locals.post_data.curr_comment %>">
-                <input type="radio" name="gender" value="optionA" checked> Option A<br><br>
-                <input type="radio" name="gender" value="optionB"> Option B<br><br>
-                <input type="radio" name="gender" value="optionC"> Option C<br><br>
-                <input type="submit" name="button">
-            </form>
-            </p></p>
-        </div>
+    <div class="row with-margin">
+        <% include comments.ejs %>
+        <% include questions.ejs %>
     </div>
 </div>
 </body>
