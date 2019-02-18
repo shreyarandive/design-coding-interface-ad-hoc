@@ -1,32 +1,8 @@
 'use strict';
 
-let db = require('../db');
-let User = require('../models/user');
 let Post = require('../models/post');
 let Comment = require('../models/comment');
 
-let userData = [
-    {
-        id: 1,
-        first_name: 'Shreay',
-        last_name: 'Randive',
-        email: 'chindi.chaman@gmail.com',
-        password: "xyz",
-        phone_number: '12344343',
-        source: 'Manual'
-
-    },
-    {
-        id: 7,
-        first_name: 'Shim',
-        last_name: 'Zhang',
-        email: 'shim.zhang@gmail.com',
-        password: 'charles123',
-        phone_number: '98494545',
-        source: 'Manual'
-
-    }
-];
 
 let postData = [
     {

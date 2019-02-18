@@ -10,6 +10,9 @@ var userRouter = require('./routes/UserRoutes');
 
 var app = express();
 
+var expressValidator = require('express-validator');
+app.use(expressValidator());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

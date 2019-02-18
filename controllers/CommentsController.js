@@ -3,11 +3,14 @@
 let Comment = require('../models/Comment');
 let Post = require('../models/Post');
 let checkUtil = require('../utils/checkUtil');
-let db = require('../db');
 let pageCount;
 let postData;
 let commentIDs = [];
-let totalComments;;
+let totalComments;
+
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
+
 
 module.exports = {
     loadMainPage: {
@@ -80,18 +83,6 @@ module.exports = {
         post: function(req, res)
         {
 
-            /*if (checkUtil.isNotEmpty(postData)) {
-                let response = {
-                    status_code: 500,
-                    msg: 'fetching post error',postData
-                };
-
-                res.send(response);
-                return;
-            }*/
-
-            //let curr = Number(req.params.current_comment);
-
             if (checkUtil.isNotEmpty(req.current_comment)) {
                 let response = {
                     status_code: 500,
@@ -105,7 +96,10 @@ module.exports = {
             let commentIndex = Number(req.params.current_comment);
             let commentsArr = postData.data;
             console.log("Question submitted for comment " + commentsArr[commentIndex]);
-            console.log("Answers " + req.body.gender);
+
+            req.checkBody('code_notes','Empty').notEmpty();
+            if(req.validationErrors())
+                console.log("error",req.validationErrors());
 
             // TODO Update DB with comment Id and answers
 

@@ -1,7 +1,7 @@
 'use strict';
 
 let express = require('express');
-let Controller = require('../controllers/UserController');
+let Controller = require('../controllers/CommentsController');
 let router = express.Router();
 
 router.get('/comment-analysis/:page_count', Controller.loadMainPage.get);
