@@ -22,7 +22,7 @@ MYSQL_HOST=localhost
 MYSQL_PORT=3306
 MYSQL_DB=YOUR-DATABASE  
 ```
-```YOUR-DATABASE``` will be the name of the database which you will be using to create all the table in the next Step  
+```YOUR-DATABASE``` will be the name of the database which you will be using to create all the table in the next section  
 
 3. Go to the project directory in the command prompt/terminal. You can use the command ```cd design-coding-interface```  
 4. Run ```npm install```    
