@@ -6,7 +6,7 @@
 1. Install the following if not already installed on the localhost.  
 
       i. Install [Git](https://git-scm.com/downloads)    
-     ii. Download and install [node](https://nodejs.org/en/)    
+     ii. Download and install the recommended version of [node](https://nodejs.org/en/)    
     iii. Download and install [MySQL](https://dev.mysql.com/downloads/mysql/)    
     
 2. (Optional) Create a new database or you use an existing database. 
