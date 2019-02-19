@@ -6,7 +6,6 @@ let post = require('./Post');
 let Comment = db.define('comments_assholedesign_40', {
         db_comment_id: {
             type: db._Sequelize.INTEGER,
-            autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },

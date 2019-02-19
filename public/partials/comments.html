@@ -1,0 +1,9 @@
+<div ng-repeat="comment in post_data.all_comments">
+    <p>
+    <p ng-class="{true: 'alert alert-primary active_background', false: 'alert alert-primary'}[comment.comment_id === selected_id]"
+       ng-click="onCommentClick(comment.comment_id)">
+        {{ comment.message }}
+    </p>
+    <div ng-include="'partials/sub_comment.html'"></div>
+    </p>
+</div>

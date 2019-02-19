@@ -1,16 +1,32 @@
 'use strict';
 
-let db   = require('../db');
+let db = require('../db');
+let post = require('./Post');
 let comment = require('./Comment');
 
 let Coding = db.define('coding_assholedesign', {
+        id: {
+            type: db._Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false
+        },
         post_id: {
             type: db._Sequelize.STRING,
             primaryKey: true,
             allowNull: false,
             references: {
-                model: comment,
+                model: post,
                 key: 'post_id',
+            }
+        },
+        comment_id: {
+            type: db._Sequelize.STRING,
+            primaryKey: true,
+            allowNull: false,
+            references: {
+                model: comment,
+                key: 'comment_id',
             }
         },
         phatic: {
@@ -21,7 +37,7 @@ let Coding = db.define('coding_assholedesign', {
             type: db._Sequelize.INTEGER,
             default: 0
         },
-        issues_concern_virtue_ethics:{
+        issues_concern_virtue_ethics: {
             type: db._Sequelize.INTEGER,
             default: 0
         },

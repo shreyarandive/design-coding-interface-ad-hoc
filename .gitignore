@@ -67,3 +67,8 @@ typings/
 
 #Mac
 .DS_Store
+
+#SQL
+.sql
+*.sql
+*/*.sql

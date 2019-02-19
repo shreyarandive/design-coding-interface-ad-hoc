@@ -1,0 +1,9 @@
+<div class="nav-bar">
+    <a ng-if="post_data.prev_page < 0">Previous</a>
+    <a ng-if="post_data.prev_page > 0" ng-click="showPrevPage(post_data.prev_page)">Previous</a>
+
+    <a href="{{ post_data.post_link }}" target="_blank">Permalink</a>
+
+    <a ng-if="post_data.next_page >= 40">Next</a>
+    <a ng-if="post_data.next_page < 40" ng-click="showNexPage(post_data.next_page)">Next</a>
+</div>

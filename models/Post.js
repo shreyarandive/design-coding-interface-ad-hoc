@@ -5,7 +5,6 @@ let db   = require('../db');
 let Post = db.define('posts_assholedesign_40', {
         db_id: {
             type: db._Sequelize.INTEGER,
-            autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
