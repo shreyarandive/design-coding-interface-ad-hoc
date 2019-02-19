@@ -11,16 +11,17 @@
     
 2. (Optional) Create a new database or you use an existing database. 
 
-**Getting the project files locally**
+**Getting the project files locally and updating .env file**
 1. Clone this repository or download the zip file and unzip it    
-2. Go to the project directory in the command prompt/terminal. You can use the command ```cd design-coding-interface```  
+2. Open and edit the .env file according to your MySQL credentials and the name of the database that you will be using.
+3. Go to the project directory in the command prompt/terminal. You can use the command ```cd design-coding-interface```  
 3. Run ```npm install```    
 
 **Creating Tables**
 1. Go to db_scripts directory. Run ```cd db_scripts```  
 2. Run ```./db_setup.sh```  
 3. Enter MySQL username (usually it is root)   
-4. Enter the name of the database that you want to use or that you created in the **Setup** step 2  
+4. Enter the name of the database that you are using and is in the .env file as well  
 5. Enter MySQL password   
 
 Troubleshoot: If you get an error in step 2 saying ```permission denied```. Run ```chmod u+x ./db_setup.sh```   
