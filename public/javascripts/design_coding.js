@@ -130,7 +130,7 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
         }).success(function (data) {
             if (data.status_code === 200) {
                 console.log("Answer submit success ");
-                $scope.success = true;
+                $scope.success = false;
                 $scope.success_msg = "Submitted successfully";
             } else {
                 console.log("Error " + data.msg);

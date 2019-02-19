@@ -5,7 +5,7 @@ let Controller = require('../backend/CommentsController');
 let router = express.Router();
 
 router.get('/', function(req, res) {
-    res.render("home", {title: 'Welcome'});
+    res.render("home", {title: '#ashdesign Coding'});
 });
 
 router.get('/comment-analysis/:page_count', Controller.loadMainPage.get);

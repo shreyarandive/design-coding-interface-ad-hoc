@@ -12,11 +12,9 @@ module.exports = {
     loadMainPage: {
         get: function (req, res) {
 
-            //check if post_count is a valid number using check util
-            //console.log(req.params.page_count);
             let pageCount = Number(req.params.page_count);
 
-            if (totalPosts > 0 && pageCount === 0) {
+            if (totalPosts > 0 || pageCount === 0) {
                 Post.count()
                     .then(count => {
                         console.log("Total posts found " + count);

@@ -36,6 +36,16 @@ ul {
   z-index: 500;
 }
 
+.parent {
+  background-color: rgba(178, 176, 176, 0.74);
+  margin-bottom: 5px;
+}
+
+.child {
+  background-color: rgba(224, 221, 221, 0.7);
+  margin-bottom: 5px;
+}
+
 .previous {
   left: 70px;
 }
@@ -63,8 +73,8 @@ ul {
 
 .active_background{
   background-color: #1e90ff60;
-  outline-style: groove;
   outline-color: yellow;
+  outline-style: wave;
 }
 
 .not_active_background{
@@ -96,13 +106,13 @@ ul {
 .check-box-no-sub{
   padding-left: 10px;
   padding-top: 10px;
-  border-bottom: 5px solid #999999;
+  border-bottom: 2px solid rgba(55, 54, 54, 0.74);
 }
 
 .check-box-sub {
   padding-left: 10px;
   padding-top: 10px;
-  border-bottom: 5px solid #999999;
+  border-bottom: 2px solid rgba(55, 54, 54, 0.74);
 }
 
 .sub-section {
@@ -133,6 +143,11 @@ ul {
 
 .code-notes{
   padding-left: 20px;
+}
+
+.questions {
+  color: black;
+  background-color: #a2d2ff;
 }
 
 textarea{
