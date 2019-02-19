@@ -4,8 +4,8 @@ let db = require('../db');
 let post = require('./Post');
 let comment = require('./Comment');
 
-let Coding = db.define('coding_assholedesign', {
-        id: {
+let Coding = db.define('coding_ashdesign_comments', {
+        db_id: {
             type: db._Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,

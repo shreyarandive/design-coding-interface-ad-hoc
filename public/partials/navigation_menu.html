@@ -1,9 +1,9 @@
 <div class="nav-bar">
-    <button ng-if="post_data.prev_page >= 0" ng-click="showPrevPage(post_data.prev_page)" class="nav-bar-button previous">Previous</button>
-    <button ng-if="post_data.prev_page < 0" class="nav-bar-button">Previous</button>
+    <button ng-if="post_data.prev_page > 0" ng-click="showPrevPage(post_data.prev_page)" class="nav-bar-button previous">Previous</button>
+    <button ng-if="post_data.prev_page <= 0" class="nav-bar-button">Previous</button>
 
-    <button href="{{ post_data.post_link }}" target="_blank" class="nav-bar-button permalink">Permalink</button>
+    <a href="{{ post_data.post_link }}" target="_blank" class="nav-bar-button permalink">Permalink</a>
 
-    <button ng-if="post_data.next_page > 40" ng-click="showNexPage(post_data.next_page)" class="nav-bar-button next">Next</button>
-    <button ng-if="post_data.next_page >= 0" class="nav-bar-button">Next</button>
+    <button ng-if="post_data.next_page > 0" ng-click="showNextPage(post_data.next_page)" class="nav-bar-button next">Next</button>
+    <button ng-if="post_data.next_page >= 40" class="nav-bar-button">Next</button>
 </div>

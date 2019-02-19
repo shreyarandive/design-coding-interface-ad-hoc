@@ -1,5 +1,5 @@
 <div ng-include="'partials/navigation_menu.html'"></div>
-<div class="main container">
+<div class="main container" ng-init="getPageContent()">
     <div class="row with-margin">
         <div ng-include="'partials/comments.html'" class="col-7 scrollable_div"></div>
         <div ng-include="'partials/questions.html'" class="col-5 scrollable_div"></div>

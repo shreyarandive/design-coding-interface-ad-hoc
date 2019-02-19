@@ -7,6 +7,7 @@ body {
 a {
   color: #00B7FF;
 }
+
 ul {
   border-left: 1px dotted black;
 }
@@ -36,11 +37,11 @@ ul {
 }
 
 .previous {
-  left: 470px;
+  left: 70px;
 }
 
 .next {
-  left: 70px;
+  left: 470px;
 }
 
 .permalink {
@@ -168,6 +169,3 @@ input{
   top: 3px;
   *overflow: hidden;
 }
-
-
-

@@ -10,7 +10,7 @@ designCoding.config(function ($routeProvider, $locationProvider) {
                 templateUrl: '/partials/welcome.html',
                 controller: 'welcome'
             })
-        .when('/page_content',
+        .when('/page_content/:page',
             {
                 templateUrl: '/partials/page_content.html',
                 controller: 'page_content'
@@ -20,36 +20,19 @@ designCoding.config(function ($routeProvider, $locationProvider) {
 
 
 // Controllers below should have same name as mentioned above
+designCoding.controller('welcome', function ($scope, $http, $window) {
+    $scope.title = "#ashdesign coding";
 
-designCoding.controller('welcome', function ($scope, $http, $window, $rootScope) {
-    $scope.title = "to ma site!";
-    $rootScope.current_page = 1;
-    console.log("Current page set " + $rootScope.current_page);
-
-    $scope.showPostContent = function () {
-        $http({
-            method: "GET",
-            url: '/comment-analysis/' + $rootScope.current_page,
-            params: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (response) {
-            console.log(JSON.stringify(response.data.post_data));
-            $rootScope.post_data = response.data.post_data;
-            $window.location.href = "#/page_content";
-        }, function (error) {
-            console.log("Error " + error);
-            $scope.error_msg = error;
-            $scope.error = true;
-        });
+    $scope.onStartClick = function () {
+        $window.location.href = "#/page_content/0";
     };
 });
 
-designCoding.controller('page_content', function ($scope, $http, $window, $rootScope) {
-    console.log("Current page value is " + $rootScope.current_page);
-    console.log("Current page post data " + $rootScope.post_data);
+designCoding.controller('page_content', function ($scope, $http, $window, $rootScope, $routeParams) {
+    console.log("Route params " + $routeParams.page);
 
-    $scope.answer_coding = {
-        post_id: $rootScope.post_data.post_id,
+    const defaultAnswers = {
+        post_id: -1,
         comment_id: -1,
         phatic: false,
         issues_concern: false,
@@ -72,30 +55,88 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
         code_notes: ""
     };
 
-    if ($rootScope.post_data.all_comments.length > 0) {
-        $scope.selected_id = $rootScope.post_data.all_comments[0].comment_id;
-    }
 
-    $scope.post_data = $rootScope.post_data;
-    $rootScope.current_page = $rootScope.current_page + 1;
+    $scope.getPageContent = function () {
+        $http({
+            method: "GET",
+            url: '/comment-analysis/' + $routeParams.page,
+            params: {},
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (response) {
+            console.log(JSON.stringify(response.data.post_data));
+            $scope.initPageContent(response.data.post_data);
+        }, function (error) {
+            console.log("Error " + error);
+            $scope.error_msg = error;
+            $scope.error = true;
+        });
+    };
 
+    $scope.initPageContent = function(post_data) {
+        if (post_data.all_comments.length > 0) {
+            $scope.selected_id = post_data.all_comments[0].comment_id;
+            $scope.post_id = post_data.post_id;
+        }
+        $scope.getCommentCodingStatus();
+        $scope.post_data = post_data;
+        $scope.answer_coding = defaultAnswers;
+        $scope.success = false;
+        $scope.error = false;
+        $scope.info = false;
+    };
 
     $scope.onCommentClick = function (commentId) {
         console.log("Selected comment Id " + commentId);
         $scope.selected_id = commentId;
+        $scope.answer_coding = defaultAnswers;
+
+        $scope.getCommentCodingStatus();
+    };
+
+    $scope.getCommentCodingStatus = function() {
+        $http({
+            method: "GET",
+            url: '/get-status/' + $scope.selected_id,
+            params: {},
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data) {
+            if (data.status_code === 200) {
+                console.log("Found coding");
+                data.answer_coding.post_id = $scope.post_id;
+                $scope.answer_coding = data.answer_coding;
+            } else {
+                console.log("Error " + data.msg);
+                $scope.error_msg = error;
+                $scope.error = true;
+            }
+        }).error(function (error) {
+            console.log("Error " + error);
+            $scope.error_msg = error;
+            $scope.error = true;
+        });
     };
 
     $scope.onAnswerSubmit = function () {
         $scope.answer_coding.comment_id = $scope.selected_id;
+        let answers = $scope.answer_coding;
+        $scope.answer_coding = defaultAnswers;
         console.log("Answer submitted " + JSON.stringify($scope.answer_coding))
 
         $http({
             method: "POST",
             url: '/submit-coding',
-            data: {answer_coding: $scope.answer_coding},
+            data: {answer_coding: answers},
             headers: {'Content-Type': 'application/json'}
         }).success(function (data) {
-            console.log("Answer submit success ");
+            if (data.status_code === 200) {
+                console.log("Answer submit success ");
+                $scope.success = true;
+                $scope.success_msg = "Submitted successfully";
+            } else {
+                console.log("Error " + data.msg);
+                $scope.error_msg = error;
+                $scope.error = true;
+            }
         }).error(function (error) {
             console.log("Error " + error);
             $scope.error_msg = error;
@@ -105,9 +146,11 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
 
     $scope.showPrevPage = function (prevPage) {
         console.log("Show prev page " + prevPage);
+        $window.location.href = "#/page_content/" + prevPage;
     };
 
-    $scope.showNexPage = function (nextPage) {
+    $scope.showNextPage = function (nextPage) {
         console.log("Show next page " + nextPage);
-    }
+        $window.location.href = "#/page_content/" + nextPage;
+    };
 });

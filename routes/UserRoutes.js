@@ -10,5 +10,6 @@ router.get('/', function(req, res) {
 
 router.get('/comment-analysis/:page_count', Controller.loadMainPage.get);
 router.post('/submit-coding', Controller.submitCoding.post);
+router.get('/get-status/:comment_id', Controller.getStatus.get);
 
 module.exports = router;
