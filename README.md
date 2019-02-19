@@ -7,7 +7,7 @@
 
       i. Install [Git](https://git-scm.com/downloads)    
      ii. Download and install the recommended version of [node](https://nodejs.org/en/)    
-    iii. Download and install [MySQL](https://dev.mysql.com/downloads/mysql/)    
+    iii. Download and install [MySQL](https://dev.mysql.com/downloads/windows/installer/8.0.html)    
     
 2. (Optional) Create a new database or you use an existing database. 
 
