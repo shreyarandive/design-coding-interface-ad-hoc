@@ -10,144 +10,11 @@ a {
 
 ul {
   border-left: 1px dotted black;
+  margin-bottom: 0px;
 }
 
-.nav-bar {
-  background-color: #064182;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 500;
-  padding-left: 70px;
-  height: 45px;
-}
-
-.nav-bar-button {
-  background-color: #064182;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  width: 200px;
-  position: fixed;
-  top: 0;
-  border: none;
-  z-index: 500;
-}
-
-.parent {
-  background-color: rgba(178, 176, 176, 0.74);
-  margin-bottom: 5px;
-}
-
-.child {
-  background-color: rgba(224, 221, 221, 0.7);
-  margin-bottom: 5px;
-}
-
-.previous {
-  left: 70px;
-}
-
-.next {
-  left: 470px;
-}
-
-.permalink {
-  left: 270px;
-}
-
-.submit {
-  right: 70px;
-}
-
-.nav-bar-button:hover {
-  background: #ddd;
-  color: black;
-}
-
-.main {
-  margin-top: 30px;
-}
-
-.active_background{
-  background-color: #1e90ff60;
-  outline-color: yellow;
-  outline-style: wave;
-}
-
-.not_active_background{
-  background-color: lightskyblue;
-}
-
-.row.with-margin{
-  margin: 10px -70px;
-}
-
-.scrollable_div{
-  overflow-y: scroll;
-  width: 100%;
-  height: 100vh;
-  scroll-behavior: smooth;
-}
-
-.options{
-  margin-left: 5px;
-}
-
-.check-box:hover {
-  background: #CCC;
-}
-.check-box.active:hover {
-  background: lightblue;
-}
-
-.check-box-no-sub{
-  padding-left: 10px;
-  padding-top: 10px;
-  border-bottom: 2px solid rgba(55, 54, 54, 0.74);
-}
-
-.check-box-sub {
-  padding-left: 10px;
-  padding-top: 10px;
-  border-bottom: 2px solid rgba(55, 54, 54, 0.74);
-}
-
-.sub-section {
-  padding-left: 30px;
-  border-bottom: 1px dotted #999;
-}
-
-.sub-section-last {
-  padding-left: 30px;
-}
-
-.sub-section-heading{
-  padding-left: 30px;
-}
-
-.sub-section-last-in-section {
-  padding-left: 30px;
-  border-bottom: 1px solid #999;
-}
-
-.reveal-if-selected {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transform: scale(0.8);
-  transition: 0.5s;
-}
-
-.code-notes{
-  padding-left: 20px;
-}
-
-.questions {
-  color: black;
-  background-color: #a2d2ff;
+p {
+  overflow-wrap: break-word;
 }
 
 textarea{
@@ -183,4 +50,130 @@ input{
   position: relative;
   top: 3px;
   *overflow: hidden;
+}
+
+.nav-bar {
+  background-color: #064182;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 500;
+  padding-left: 70px;
+  height: 45px;
+}
+
+.nav-bar-button {
+  background-color: #064182;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  border: none;
+  z-index: 500;
+}
+
+.nav-bar-button:hover {
+  background: #ddd;
+  color: black;
+}
+
+.parent {
+  background-color: rgba(178, 176, 176, 0.74);
+  margin-bottom: 5px;
+}
+
+.child {
+  background-color: rgba(224, 221, 221, 0.7);
+  margin-bottom: 5px;
+}
+
+.previous {
+  left: 70px;
+}
+
+.questions {
+  color: black;
+  background-color: #a2d2ff;
+}
+
+.next {
+  left: 470px;
+}
+
+.permalink {
+  left: 270px;
+}
+
+.submit {
+  right: 70px;
+}
+
+.main {
+  margin-top: 30px;
+}
+
+.active_background{
+  background-color: #1e90ff60;
+  outline-color: yellow;
+  outline-style: wave;
+}
+
+.not_active_background{
+  background-color: lightskyblue;
+}
+
+.row.with-margin{
+  margin: 10px -70px;
+}
+
+.scrollable_div{
+  overflow-y: scroll;
+  width: 100%;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.option-theme:hover {
+  background: #8eb8e0;
+}
+.option-theme.active:hover {
+  background: lightblue;
+}
+
+.option-theme {
+  padding-left: 10px;
+  padding-top: 10px;
+  border-bottom: 2px solid rgba(55, 54, 54, 0.74);
+}
+
+.option-sub-theme {
+  padding-left: 30px;
+}
+
+.dotted-thin-border-at-bottom {
+  border-bottom: 1px dotted #999;
+}
+
+.solid-thin-border-at-bottom {
+  border-bottom: 1px solid #999;
+}
+
+.solid-thick-border-at-top {
+  border-top: 2px solid rgba(55, 54, 54, 0.74);
+}
+
+.reveal-if-selected {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: 0.5s;
+}
+
+.code-notes{
+  padding-left: 20px;
 }

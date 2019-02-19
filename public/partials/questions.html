@@ -3,7 +3,7 @@
     <p>
     <form class="alert questions" name="question-form" ng-submit="onAnswerSubmit()">
 
-        <div id="phatic" class="check-box-no-sub row">
+        <div id="phatic" class="option-theme solid-thick-border-at-top row">
             <input type="checkbox" name="phatic" value="1" ng-model="answer_coding.phatic">
             <label for="phatic">
                 <strong>Phatic Communication</strong><br>Comments which are not related to the post and mostly are
@@ -11,19 +11,19 @@
             </label>
         </div>
 
-        <div id="issues_concern" class="check-box-no-sub row">
+        <div id="issues_concern" class="option-theme row">
             <input type="checkbox" name="issues_concern" value="1" ng-model="answer_coding.issues_concern">
             <label for="issues_concern">
                 <strong>Issue/ Concern</strong><br>
                 Raising that there is a problem or reason
             </label>
 
-            <div id="issues_concern_classification" class="sub-section-heading row reveal-if-selected">
+            <div id="issues_concern_classification" class="option-sub-theme row reveal-if-selected">
                 <label for="issues_concern_classification">
                     a. Classification of ethical paradigm
                 </label>
 
-                <div id="issues_concern_virtue_ethics" class="sub-section row">
+                <div id="issues_concern_virtue_ethics" class="option-sub-theme dotted-thin-border-at-bottom row">
                     <input type="checkbox" name="issues_concern_virtue_ethics" value="1"
                            ng-model="answer_coding.issues_concern_virtue_ethics">
                     <label for="issues_concern_virtue_ethics">
@@ -35,7 +35,7 @@
                     </label>
                 </div>
 
-                <div id="issues_concern_consequentialist_ethics" class="sub-section row">
+                <div id="issues_concern_consequentialist_ethics" class="option-sub-theme dotted-thin-border-at-bottom row">
                     <input type="checkbox" name="issues_concern_consequentialist_ethics" value="1"
                            ng-model="answer_coding.issues_concern_consequentialist_ethics">
                     <label for="issues_concern_consequentialist_ethics">
@@ -47,7 +47,7 @@
                     </label>
                 </div>
 
-                <div id="issues_concern_deontological_ethics" class="sub-section-last row">
+                <div id="issues_concern_deontological_ethics" class="option-sub-theme row">
                     <input type="checkbox" name="issues_concern_deontological_ethics" value="1"
                            ng-model="answer_coding.issues_concern_deontological_ethics">
                     <label for="issues_concern_deontological_ethics">
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div id="proposed_remedy" class="check-box-sub row row">
+        <div id="proposed_remedy" class="option-theme row">
             <input type="checkbox" name="proposed_remedy" value="1" ng-model="answer_coding.proposed_remedy">
             <label for="proposed_remedy">
                 <strong>Proposed Remedy</strong><br>
@@ -67,12 +67,12 @@
             </label>
 
             <div class="reveal-if-selected">
-                <div id="proposed_remedy_types" class="sub-section-heading row">
+                <div id="proposed_remedy_types" class="option-sub-theme row">
                     <label for="proposed_remedy_types">
                         a. Types
                     </label>
 
-                    <div id="proposed_remedy_types_legal" class="sub-section row">
+                    <div id="proposed_remedy_types_legal" class="option-sub-theme dotted-thin-border-at-bottom row">
                         <input type="checkbox" name="proposed_remedy_types_legal" value="1"
                                ng-model="answer_coding.proposed_remedy_types_legal">
                         <label for="proposed_remedy_types_legal">
@@ -82,7 +82,7 @@
                         </label>
                     </div>
 
-                    <div id="proposed_remedy_types_shame" class="sub-section row">
+                    <div id="proposed_remedy_types_shame" class="option-sub-theme dotted-thin-border-at-bottom row">
                         <input type="checkbox" name="proposed_remedy_types_shame" value="1"
                                ng-model="answer_coding.proposed_remedy_types_shame">
                         <label for="proposed_remedy_types_shame">
@@ -92,7 +92,7 @@
                         </label>
                     </div>
 
-                    <div id="proposed_remedy_types_hack" class="sub-section-last-in-section row">
+                    <div id="proposed_remedy_types_hack" class="option-sub-theme solid-thin-border-at-bottom row">
                         <input type="checkbox" name="proposed_remedy_types_hack" value="1"
                                ng-model="answer_coding.proposed_remedy_types_hack">
                         <label for="proposed_remedy_types_hack">
@@ -104,12 +104,12 @@
                     </div>
                 </div>
 
-                <div id="proposed_remedy_directed_to" class="sub-section-heading row row">
+                <div id="proposed_remedy_directed_to" class="option-sub-theme row row">
                     <label for="proposed_remedy_directed_to">
                         b. Directed towards
                     </label>
 
-                    <div id="proposed_remedy_directed_to_individual" class="sub-section row">
+                    <div id="proposed_remedy_directed_to_individual" class="option-sub-theme dotted-thin-border-at-bottom row">
                         <input type="checkbox" name="proposed_remedy_directed_to_individual" value="1"
                                ng-model="answer_coding.proposed_remedy_directed_to_individual">
                         <label for="proposed_remedy_directed_to_individual">
@@ -120,7 +120,7 @@
                         </label>
                     </div>
 
-                    <div id="proposed_remedy_directed_to_society" class="sub-section-last row">
+                    <div id="proposed_remedy_directed_to_society" class="option-sub-theme row">
                         <input type="checkbox" name="proposed_remedy_directed_to_society" value="1"
                                ng-model="answer_coding.proposed_remedy_directed_to_society">
                         <label for="proposed_remedy_directed_to_society">
@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        <div id="modifiers" class="check-box-sub row">
+        <div id="modifiers" class="option-theme row">
             <input type="checkbox" name="modifiers" value="1" ng-model="answer_coding.modifiers">
             <label for="modifiers">
                 <strong>Modifiers</strong><br>
@@ -141,7 +141,7 @@
             </label>
 
             <div class="reveal-if-selected">
-                <div id="modifiers_extends" class="sub-section row">
+                <div id="modifiers_extends" class="option-sub-theme dotted-thin-border-at-bottom row">
                     <input type="checkbox" name="modifiers_extends" value="1"
                            ng-model="answer_coding.modifiers_extends">
                     <label for="modifiers_extends">
@@ -151,7 +151,7 @@
                     </label>
                 </div>
 
-                <div id="modifiers_example" class="sub-section row">
+                <div id="modifiers_example" class="option-sub-theme dotted-thin-border-at-bottom row">
                     <input type="checkbox" name="modifiers_example" value="1"
                            ng-model="answer_coding.modifiers_example">
                     <label for="modifiers_example">
@@ -161,7 +161,7 @@
                     </label>
                 </div>
 
-                <div id="modifiers_conditional" class="sub-section row">
+                <div id="modifiers_conditional" class="option-sub-theme dotted-thin-border-at-bottom row">
                     <input type="checkbox" name="modifiers_conditional" value="1"
                            ng-model="answer_coding.modifiers_conditional">
                     <label for="modifiers_conditional">
@@ -171,7 +171,7 @@
                     </label>
                 </div>
 
-                <div id="modifiers_disagree_counter" class="sub-section row">
+                <div id="modifiers_disagree_counter" class="option-sub-theme dotted-thin-border-at-bottom row">
                     <input type="checkbox" name="modifiers_disagree_counter" value="1"
                            ng-model="answer_coding.modifiers_disagree_counter">
                     <label for="modifiers_disagree_counter">
@@ -181,7 +181,7 @@
                     </label>
                 </div>
 
-                <div id="modifiers_futuring" class="sub-section-last row">
+                <div id="modifiers_futuring" class="option-sub-theme row">
                     <input type="checkbox" name="modifiers_futuring" value="1"
                            ng-model="answer_coding.modifiers_futuring">
                     <label for="modifiers_futuring">
@@ -193,7 +193,7 @@
             </div>
         </div>
 
-        <div id="sub_level_conversational_shift" class="check-box-no-sub row">
+        <div id="sub_level_conversational_shift" class="option-theme row">
             <input type="checkbox" name="sub_level_conversational_shift" value="1"
                    ng-model="answer_coding.sub_level_conversational_shift">
             <label for="sub_level_conversational_shift">
@@ -202,7 +202,7 @@
             </label>
         </div>
 
-        <div id="code_notes" class="check-box-no-sub row">
+        <div id="code_notes" class="option-theme row">
             <label for="code_notes" class="code-notes">
                 <strong class="code-notes">Code Notes</strong>
                 <br>

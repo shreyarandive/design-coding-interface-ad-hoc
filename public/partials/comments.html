@@ -3,7 +3,7 @@
     <p ng-class="{true: 'alert active_background parent', false: 'alert parent'}[comment.comment_id === selected_id]"
        ng-click="onCommentClick(comment.comment_id)">
         {{ comment.message }}
-    </p>
+
     <div ng-include="'partials/sub_comment.html'"></div>
-    </p>
+
 </div>
