@@ -18,39 +18,40 @@ ul {
   width: 100%;
   z-index: 500;
   padding-left: 70px;
+  height: 45px;
 }
 
-.nav-bar a {
-  float: left;
+.nav-bar-button {
+  background-color: #064182;
   display: block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   width: 200px;
-}
-
-.nav-bar a:hover {
-  background: #ddd;
-  color: black;
-}
-
-.nav-bar-input{
-  background-color: #064182;
   position: fixed;
-  padding: 14px 16px;
   top: 0;
-  right: 70px;
-  z-index: 500;
-  float: right;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  width: 200px;
   border: none;
+  z-index: 500;
 }
 
-.nav-bar-input:hover{
+.previous {
+  left: 470px;
+}
+
+.next {
+  left: 70px;
+}
+
+.permalink {
+  left: 270px;
+}
+
+.submit {
+  right: 70px;
+}
+
+.nav-bar-button:hover {
   background: #ddd;
   color: black;
 }
