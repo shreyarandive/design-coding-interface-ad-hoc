@@ -38,7 +38,7 @@ Troubleshoot:
 2. If the ```db_setup.sh``` script does not work (I tried it on a Windows computer and it didn't seem to work, I will try to fix it), run the following queries one by one  
 
       ```mysql -u root YOUR-DATABASE -p < posts_ashdesign.sql```
-      ```mysql -u root YOUR-DATABASE -p < comments_ashdesign.sql```
+      ```mysql -u root YOUR-DATABASE -p < comments_ashdesign.sql```  
       ```mysql -u root YOUR-DATABASE -p < coding_ashdesign.sql```
 
 **Running the tool**  
