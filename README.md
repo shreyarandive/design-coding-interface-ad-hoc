@@ -24,8 +24,7 @@ MYSQL_DB=YOUR-DATABASE
 ```
 ```YOUR-DATABASE``` will be the name of the database which you will be using to create all the table in the next section  
 
-3. Go to the project directory in the command prompt/terminal. You can use the command ```cd design-coding-interface```  
-4. Run ```npm install```    
+3. Run ```npm install```    
 
 **Creating Tables**
 1. Go to db_scripts directory. Run ```cd db_scripts```  
