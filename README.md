@@ -28,12 +28,18 @@ MYSQL_DB=YOUR-DATABASE
 
 **Creating Tables**
 1. Go to db_scripts directory. Run ```cd db_scripts```  
-2. Run ```./db_setup.sh```  
+2. Run ```db_setup.sh``` (Windows) or Run ```./db_setup.sh``` (Mac)  
 3. Enter MySQL username (usually it is root)   
 4. Enter the name of the database that you are using and is in the .env file as well  
 5. Enter MySQL password   
 
-Troubleshoot: If you get an error in step 2 saying ```permission denied```. Run ```chmod u+x ./db_setup.sh```   
+Troubleshoot:   
+1. If you get an error in step 2 saying ```permission denied```. Run ```chmod u+x ./db_setup.sh```
+2. If the ```db_setup.sh``` script does not work (I tried it on a Windows computer and it didn't seem to work, I will try to fix it), run the following queries one by one  
+
+      ```mysql -u root YOUR-DATABASE -p < posts_ashdesign.sql```
+      ```mysql -u root YOUR-DATABASE -p < comments_ashdesign.sql```
+      ```mysql -u root YOUR-DATABASE -p < coding_ashdesign.sql```
 
 **Running the tool**  
 1. Run ```npm start```    
