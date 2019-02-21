@@ -12,11 +12,11 @@
 2. (Optional) Create a new database or you use an existing database. 
 
 **Getting the project files locally and updating .env file**
-1. Clone this repository or download the zip file and unzip it    
-2. Open and edit the .env file according to your MySQL credentials 
+1. Clone this repository locally  
+2. Add .env file in root directory with your MySQL database credentials using the following format
 
 ```$xslt
-MYSQL_USER=YOUR_USERNAME
+MYSQL_USER=YOUR-USERNAME
 MYSQL_PASSWORD=YOUR-PASSWORD
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
@@ -24,7 +24,7 @@ MYSQL_DB=YOUR-DATABASE
 ```
 ```YOUR-DATABASE``` will be the name of the database which you will be using to create all the table in the next Step  
 
-3. Go to the project directory in the command prompt/terminal. You can use the command ```cd design-coding-interface```  
+3. Go to the project root directory in the terminal
 4. Run ```npm install```    
 
 **Creating Tables**
