@@ -130,18 +130,37 @@ module.exports = {
                 code_notes: answers.code_notes
             };
 
-            Coding.create(answersObj)
-                .then(coding => {
-                    console.log("Added the answers for the coding " + coding);
-                    res.send({status_code: 200})
+            Coding.bulkCreate([answersObj],
+                {updateOnDuplicate: ['phatic',
+                        'issues_concern',
+                        'issues_concern_virtue_ethics',
+                        'issues_concern_consequentialist_ethics',
+                        'issues_concern_deontological_ethics',
+                        'proposed_remedy',
+                        'proposed_remedy_types_legal',
+                        'proposed_remedy_types_shame',
+                        'proposed_remedy_types_hack',
+                        'proposed_remedy_directed_to_individual',
+                        'proposed_remedy_directed_to_society',
+                        'modifiers',
+                        'modifiers_extends',
+                        'modifiers_example',
+                        'modifiers_conditional',
+                        'modifiers_disagree_counter',
+                        'modifiers_futuring',
+                        'sub_level_conversational_shift',
+                        'code_notes']})
+            .then(coding => {
+                console.log("Added the answers for the coding " + coding);
+                res.send({status_code: 200})
+            })
+            .catch(err => {
+                console.log("Error adding the coding " + err);
+                res.send({
+                    status_code: 500,
+                    msg: 'Failed to add coding to DB ' + err
                 })
-                .catch(err => {
-                    console.log("Error adding the coding " + err);
-                    res.send({
-                        status_code: 500,
-                        msg: 'Failed to add coding to DB ' + err
-                    })
-                });
+            });
         },
     },
 

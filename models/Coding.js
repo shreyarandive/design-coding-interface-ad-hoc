@@ -13,21 +13,12 @@ let Coding = db.define('coding_ashdesign', {
         },
         post_id: {
             type: db._Sequelize.STRING,
-            primaryKey: true,
             allowNull: false,
-            references: {
-                model: post,
-                key: 'post_id',
-            }
         },
         comment_id: {
             type: db._Sequelize.STRING,
-            primaryKey: true,
             allowNull: false,
-            references: {
-                model: comment,
-                key: 'comment_id',
-            }
+            unique: true
         },
         phatic: {
             type: db._Sequelize.INTEGER,

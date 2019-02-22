@@ -1,10 +1,10 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET time_zone = "-05:00";
 
 CREATE TABLE `coding_ashdesign` (
   `db_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `post_id` text NOT NULL,
-  `comment_id` text NOT NULL,
+  `post_id` varchar(20) NOT NULL,
+  `comment_id` varchar(20) NOT NULL,
   `phatic` int(11) DEFAULT NULL,
   `issues_concern` int(11) DEFAULT NULL,
   `issues_concern_virtue_ethics` int(11) DEFAULT NULL,
@@ -25,5 +25,5 @@ CREATE TABLE `coding_ashdesign` (
   `sub_level_conversational_shift` int(11) DEFAULT NULL,
   `code_notes` text,
   `comment_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`db_id`)
+  PRIMARY KEY (`db_id`),UNIQUE(`comment_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
