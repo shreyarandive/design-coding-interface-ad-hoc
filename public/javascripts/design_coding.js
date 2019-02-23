@@ -7,8 +7,8 @@ designCoding.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/',
             {
-                templateUrl: '/partials/welcome.html',
-                controller: 'welcome'
+                templateUrl: '/partials/home.html',
+                controller: 'home'
             })
         .when('/page_content/:page',
             {
@@ -20,7 +20,7 @@ designCoding.config(function ($routeProvider, $locationProvider) {
 
 
 // Controllers below should have same name as mentioned above
-designCoding.controller('welcome', function ($scope, $http, $window) {
+designCoding.controller('home', function ($scope, $http, $window) {
     $scope.title = "#ashdesign coding";
 
     $scope.onStartClick = function () {
@@ -31,7 +31,7 @@ designCoding.controller('welcome', function ($scope, $http, $window) {
 designCoding.controller('page_content', function ($scope, $http, $window, $rootScope, $routeParams) {
     console.log("Route params " + $routeParams.page);
 
-    const defaultAnswers = {
+    const defaultCodes = {
         post_id: -1,
         comment_id: -1,
         phatic: false,
@@ -79,7 +79,7 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
         }
         $scope.getCommentCodingStatus();
         $scope.post_data = post_data;
-        $scope.answer_coding = defaultAnswers;
+        $scope.answer_coding = defaultCodes;
         $scope.success = false;
         $scope.error = false;
         $scope.info = false;
@@ -88,7 +88,7 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
     $scope.onCommentClick = function (commentId) {
         console.log("Selected comment Id " + commentId);
         $scope.selected_id = commentId;
-        $scope.answer_coding = defaultAnswers;
+        $scope.answer_coding = defaultCodes;
 
         $scope.getCommentCodingStatus();
     };
@@ -119,7 +119,7 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
     $scope.onAnswerSubmit = function () {
         $scope.answer_coding.comment_id = $scope.selected_id;
         let answers = $scope.answer_coding;
-        $scope.answer_coding = defaultAnswers;
+        $scope.answer_coding = defaultCodes;
         console.log("Answer submitted " + JSON.stringify($scope.answer_coding))
 
         $http({

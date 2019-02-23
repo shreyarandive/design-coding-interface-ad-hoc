@@ -1,8 +1,6 @@
 'use strict';
 
 let db = require('../db');
-let post = require('./Post');
-let comment = require('./Comment');
 
 let Coding = db.define('coding_ashdesign', {
         db_id: {
@@ -95,6 +93,10 @@ let Coding = db.define('coding_ashdesign', {
         code_notes: {
             type: db._Sequelize.STRING,
             default: ""
+        },
+        status: {
+            type: db._Sequelize.STRING,
+            default: 0
         },
     },
     {

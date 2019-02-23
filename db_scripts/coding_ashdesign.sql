@@ -24,6 +24,7 @@ CREATE TABLE `coding_ashdesign` (
   `modifiers_futuring` int(11) DEFAULT NULL,
   `sub_level_conversational_shift` int(11) DEFAULT NULL,
   `code_notes` text,
+  `status` int(11) DEFAULT NULL,
   `comment_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`db_id`),UNIQUE(`comment_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
