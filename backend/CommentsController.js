@@ -1,5 +1,6 @@
 'use strict';
 
+
 let Comment = require('../models/Comment');
 let Coding = require('../models/Coding');
 let Post = require('../models/Post');
@@ -39,6 +40,7 @@ module.exports = {
 
                             for(let j = 0; coding_for_one_post[j] != null; j++) {
                                 codingStatusInDB[coding_for_one_post[j].comment_id] = coding_for_one_post[j].status;
+
                                 console.log("STATUS--->", codingStatusInDB[coding_for_one_post[j].comment_id], coding_for_one_post[j].comment_id);
                             }
                         })
