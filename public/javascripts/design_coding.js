@@ -18,8 +18,6 @@ designCoding.config(function ($routeProvider, $locationProvider) {
         .otherwise({redirectTo: '/'});
 });
 
-
-// Controllers below should have same name as mentioned above
 designCoding.controller('home', function ($scope, $http, $window) {
     $scope.title = "#ashdesign coding";
 
@@ -85,9 +83,10 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
         $scope.info = false;
     };
 
-    $scope.onCommentClick = function (commentId) {
-        console.log("Selected comment Id " + commentId);
-        $scope.selected_id = commentId;
+    $scope.onCommentClick = function (comment) {
+        console.log("Selected comment Id " + comment.comment_id);
+        $scope.selected_id = comment.comment_id;
+        $scope.selected_comment = comment;
         $scope.answer_coding = defaultCodes;
 
         $scope.getCommentCodingStatus();
@@ -130,6 +129,9 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
         }).success(function (data) {
             if (data.status_code === 200) {
                 console.log("Answer submit success ");
+
+                $scope.selected_comment.is_coded = true;
+
                 $scope.success = false;
                 $scope.success_msg = "Submitted successfully";
             } else {

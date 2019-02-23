@@ -178,4 +178,8 @@ input{
   padding-left: 20px;
 }
 
+.is-coded {
+  border-left: solid red 2px;
+}
+
 /*/

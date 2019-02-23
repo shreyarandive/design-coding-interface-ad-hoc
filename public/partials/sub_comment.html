@@ -1,7 +1,9 @@
 <ul ng-repeat="sub_comment in comment.sub_comments">
-    <p ng-class="{true: 'alert child active_background', false: 'alert child'}[sub_comment.comment_id === selected_id]"
-       ng-click="onCommentClick(sub_comment.comment_id)">
-        {{ sub_comment.message }}
-    </p>
+    <div ng-class="{true: 'is-coded'}[comment.is_coded]">
+        <p ng-class="{true: 'alert child active_background', false: 'alert child'}[sub_comment.comment_id === selected_id]"
+           ng-click="onCommentClick(sub_comment)">
+            {{ sub_comment.message }}
+        </p>
+    </div>
     <div ng-init="comment = sub_comment;" ng-include="'partials/sub_comment.html'"></div>
 </ul>

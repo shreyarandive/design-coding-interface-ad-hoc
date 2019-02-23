@@ -1,9 +1,9 @@
-<div ng-repeat="comment in post_data.all_comments">
-    <p>
-    <p ng-class="{true: 'alert active_background parent', false: 'alert parent'}[comment.comment_id === selected_id]"
-       ng-click="onCommentClick(comment.comment_id)">
-        {{ comment.message }}
-
+<div ng-repeat="comment in post_data.all_comments"><p></p>
+    <div ng-class="{true: 'is-coded'}[comment.is_coded]">
+        <p ng-class="{true: 'alert active_background parent', false: 'alert parent'}[comment.comment_id === selected_id]"
+           ng-click="onCommentClick(comment)">
+            {{ comment.message }}
+        </p>
+    </div>
     <div ng-include="'partials/sub_comment.html'"></div>
-
 </div>

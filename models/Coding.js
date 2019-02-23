@@ -93,11 +93,7 @@ let Coding = db.define('coding_ashdesign', {
         code_notes: {
             type: db._Sequelize.STRING,
             default: ""
-        },
-        status: {
-            type: db._Sequelize.STRING,
-            default: 0
-        },
+        }
     },
     {
         freezeTableName: true,

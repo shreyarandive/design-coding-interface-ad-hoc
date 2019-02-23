@@ -1,12 +1,10 @@
 'use strict';
 
-
-let Comment = require('../models/Comment');
 let Coding = require('../models/Coding');
 let Post = require('../models/Post');
 let checkUtil = require('../utils/checkUtil');
+let db = require("../db");
 
-let codingStatusInDB = [];
 let totalComments = 0;
 let totalPosts = 0;
 
@@ -31,35 +29,10 @@ module.exports = {
 
                 .then(single_post => {
 
-                    Coding.findAll({
-                        where: {post_id: single_post.post_id},
-                        attributes: ['status', 'comment_id']
-                        })
-
-                        .then(coding_for_one_post=>{
-
-                            for(let j = 0; coding_for_one_post[j] != null; j++) {
-                                codingStatusInDB[coding_for_one_post[j].comment_id] = coding_for_one_post[j].status;
-
-                                console.log("STATUS--->", codingStatusInDB[coding_for_one_post[j].comment_id], coding_for_one_post[j].comment_id);
-                            }
-                        })
-
-                        .catch(err=> {
-                            console.log("Error Comments: " + err);
-
-                            let response = {
-                                status_code: 500,
-                                msg: 'comment fetching error'
-                            };
-
-                            res.send(response);
-                        })
-
-                    Comment.findAll({
-                        where: {post_id: single_post.post_id},
-                        attributes: ['message', 'post_id', 'parent_id', 'comment_id']
-                    })
+                    db.query("SELECT `comments_ashdesign`.`message`, `comments_ashdesign`.`post_id`, `comments_ashdesign`.`parent_id`, " +
+                        "`comments_ashdesign`.`comment_id`, `coding_ashdesign`.`comment_id` AS is_coded FROM `comments_ashdesign` LEFT JOIN `coding_ashdesign` " +
+                        "ON `coding_ashdesign`.`comment_id` = `comments_ashdesign`.`comment_id` WHERE " +
+                        "`comments_ashdesign`.`post_id` = \"" + single_post.post_id + "\"", {type: db.QueryTypes.SELECT})
 
                         .then(comments_for_one_post => {
 
@@ -71,6 +44,7 @@ module.exports = {
                                     let comment = {
                                         comment_id: comments_for_one_post[i].comment_id,
                                         message: comments_for_one_post[i].message,
+                                        is_coded: checkUtil.isNotEmpty(comments_for_one_post[i].is_coded),
                                         sub_comments: []
                                     };
                                     createCommentTree(comments_for_one_post, comments_for_one_post[i].comment_id, comment);
@@ -153,8 +127,7 @@ module.exports = {
                         modifiers_disagree_counter: codes.modifiers_disagree_counter ? 1 : 0,
                         modifiers_futuring: codes.modifiers_futuring ? 1 : 0,
                         sub_level_conversational_shift: codes.sub_level_conversational_shift ? 1 : 0,
-                        code_notes: codes.code_notes,
-                        status: 1
+                        code_notes: codes.code_notes
             };
 
             Coding.bulkCreate([codesObj],
@@ -178,6 +151,7 @@ module.exports = {
                         'sub_level_conversational_shift',
                         'code_notes']})
             .then(coding => {
+
                 console.log("Added the codes for the coding " + coding);
                 res.send({status_code: 200})
             })
@@ -229,6 +203,7 @@ function createCommentTree(postData, commentId, parentComment) {
             let subComment = {
                 comment_id: comment.comment_id,
                 message: comment.message,
+                is_coded: checkUtil.isNotEmpty(comment.is_coded),
                 sub_comments: []
             };
             parentComment.sub_comments[index] = subComment;
@@ -238,7 +213,7 @@ function createCommentTree(postData, commentId, parentComment) {
     }
 }
 
-function getCodingAnswersForUI(codingUI, commentId) {
+function getCodingAnswersForUI(codingResponse, commentId) {
     const defaultCoding = {
         post_id: -1,
         comment_id: commentId,
@@ -260,30 +235,29 @@ function getCodingAnswersForUI(codingUI, commentId) {
         modifiers_disagree_counter: false,
         modifiers_futuring: false,
         sub_level_conversational_shift: false,
-        code_notes: "",
-        status: false
+        code_notes: ""
     };
 
-    if (checkUtil.isNotEmpty(codingUI)) {
-        defaultCoding.phatic = codingUI.phatic === 1;
-        defaultCoding.issues_concern = codingUI.issues_concern === 1;
-        defaultCoding.issues_concern_virtue_ethics = codingUI.issues_concern_virtue_ethics === 1;
-        defaultCoding.issues_concern_consequentialist_ethics = codingUI.issues_concern_consequentialist_ethics === 1;
-        defaultCoding.issues_concern_deontological_ethics = codingUI.issues_concern_deontological_ethics === 1;
-        defaultCoding.proposed_remedy = codingUI.proposed_remedy === 1;
-        defaultCoding.proposed_remedy_types_legal = codingUI.proposed_remedy_types_legal === 1;
-        defaultCoding.proposed_remedy_types_shame = codingUI.proposed_remedy_types_shame === 1;
-        defaultCoding.proposed_remedy_types_hack = codingUI.proposed_remedy_types_hack === 1;
-        defaultCoding.proposed_remedy_directed_to_individual = codingUI.proposed_remedy_directed_to_individual === 1;
-        defaultCoding.proposed_remedy_directed_to_society = codingUI.proposed_remedy_directed_to_society === 1;
-        defaultCoding.modifiers = codingUI.modifiers === 1;
-        defaultCoding.modifiers_extends = codingUI.modifiers_extends === 1;
-        defaultCoding.modifiers_example = codingUI.modifiers_example === 1;
-        defaultCoding.modifiers_conditional = codingUI.modifiers_conditional === 1;
-        defaultCoding.modifiers_disagree_counter = codingUI.modifiers_disagree_counter === 1;
-        defaultCoding.modifiers_futuring = codingUI.modifiers_futuring === 1;
-        defaultCoding.sub_level_conversational_shift = codingUI.sub_level_conversational_shift === 1;
-        defaultCoding.code_notes = codingUI.code_notes;
+    if (checkUtil.isNotEmpty(codingResponse)) {
+        defaultCoding.phatic = codingResponse.phatic === 1;
+        defaultCoding.issues_concern = codingResponse.issues_concern === 1;
+        defaultCoding.issues_concern_virtue_ethics = codingResponse.issues_concern_virtue_ethics === 1;
+        defaultCoding.issues_concern_consequentialist_ethics = codingResponse.issues_concern_consequentialist_ethics === 1;
+        defaultCoding.issues_concern_deontological_ethics = codingResponse.issues_concern_deontological_ethics === 1;
+        defaultCoding.proposed_remedy = codingResponse.proposed_remedy === 1;
+        defaultCoding.proposed_remedy_types_legal = codingResponse.proposed_remedy_types_legal === 1;
+        defaultCoding.proposed_remedy_types_shame = codingResponse.proposed_remedy_types_shame === 1;
+        defaultCoding.proposed_remedy_types_hack = codingResponse.proposed_remedy_types_hack === 1;
+        defaultCoding.proposed_remedy_directed_to_individual = codingResponse.proposed_remedy_directed_to_individual === 1;
+        defaultCoding.proposed_remedy_directed_to_society = codingResponse.proposed_remedy_directed_to_society === 1;
+        defaultCoding.modifiers = codingResponse.modifiers === 1;
+        defaultCoding.modifiers_extends = codingResponse.modifiers_extends === 1;
+        defaultCoding.modifiers_example = codingResponse.modifiers_example === 1;
+        defaultCoding.modifiers_conditional = codingResponse.modifiers_conditional === 1;
+        defaultCoding.modifiers_disagree_counter = codingResponse.modifiers_disagree_counter === 1;
+        defaultCoding.modifiers_futuring = codingResponse.modifiers_futuring === 1;
+        defaultCoding.sub_level_conversational_shift = codingResponse.sub_level_conversational_shift === 1;
+        defaultCoding.code_notes = codingResponse.code_notes;
     }
 
     return defaultCoding;
