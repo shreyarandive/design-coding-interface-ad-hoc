@@ -24,7 +24,6 @@ MYSQL_DB=YOUR-DATABASE
 ```
 ```YOUR-DATABASE``` will be the name of the database which you will be using to create all the table in the next section  
 
-3. Run ```npm install```
 3. Go to the project root directory in the terminal
 4. Run ```npm install```    
 
@@ -35,13 +34,14 @@ MYSQL_DB=YOUR-DATABASE
 4. Enter the name of the database that you are using and is in the .env file as well  
 5. Enter MySQL password   
 
-Troubleshoot:   
+Troubleshooting:   
 1. If you get an error in step 2 saying ```permission denied```. Run ```chmod u+x ./db_setup.sh```
-2. If the ```db_setup.sh``` script does not work (I tried it on a Windows computer and it didn't seem to work, I will try to fix it), run the following queries one by one  
+2. If the ```db_setup.sh``` script does not work for some reason, run the following queries one by one  
 
       ```mysql -u root YOUR-DATABASE -p < posts_ashdesign.sql```  
       ```mysql -u root YOUR-DATABASE -p < comments_ashdesign.sql```  
       ```mysql -u root YOUR-DATABASE -p < coding_ashdesign.sql```
+3. If you need to drop all the existing tables, run ```npm run db:drop:tables```
 
 **Running the tool**  
 1. Run ```npm start```    
