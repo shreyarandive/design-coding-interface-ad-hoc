@@ -29,10 +29,10 @@ module.exports = {
 
                 .then(single_post => {
 
-                    db.query("SELECT `comments_ashdesign`.`message`, `comments_ashdesign`.`post_id`, `comments_ashdesign`.`parent_id`, " +
-                        "`comments_ashdesign`.`comment_id`, `coding_ashdesign`.`comment_id` AS is_coded FROM `comments_ashdesign` LEFT JOIN `coding_ashdesign` " +
-                        "ON `coding_ashdesign`.`comment_id` = `comments_ashdesign`.`comment_id` WHERE " +
-                        "`comments_ashdesign`.`post_id` = \"" + single_post.post_id + "\"", {type: db.QueryTypes.SELECT})
+                    db.query("SELECT `comments_assholedesign_25`.`message`, `comments_assholedesign_25`.`post_id`, `comments_assholedesign_25`.`parent_id`, " +
+                        "`comments_assholedesign_25`.`comment_id`, `coding_assholedesign_25`.`comment_id` AS is_coded FROM `comments_assholedesign_25` LEFT JOIN `coding_assholedesign_25` " +
+                        "ON `coding_assholedesign_25`.`comment_id` = `comments_assholedesign_25`.`comment_id` WHERE " +
+                        "`comments_assholedesign_25`.`post_id` = \"" + single_post.post_id + "\"", {type: db.QueryTypes.SELECT})
 
                         .then(comments_for_one_post => {
 
@@ -77,7 +77,7 @@ module.exports = {
                             };
 
                             res.send(response);
-                        })
+                        });
                 })
 
                 .catch(err => {

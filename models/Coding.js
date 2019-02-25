@@ -2,7 +2,7 @@
 
 let db = require('../db');
 
-let Coding = db.define('coding_ashdesign', {
+let Coding = db.define('coding_assholedesign_25', {
         db_id: {
             type: db._Sequelize.INTEGER,
             primaryKey: true,

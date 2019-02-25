@@ -1,7 +1,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "-05:00";
 
-CREATE TABLE `coding_ashdesign` (
+CREATE TABLE `coding_assholedesign_25` (
   `db_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `post_id` varchar(20) NOT NULL,
   `comment_id` varchar(20) NOT NULL,
