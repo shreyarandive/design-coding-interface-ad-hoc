@@ -4,10 +4,6 @@ let db   = require('../db');
 let post = require('./Post');
 
 let Comment = db.define('comments_assholedesign_25', {
-        db_name: {
-          type: string(),
-          value: "comments_assholedesign_25"
-        },
         db_comment_id: {
             type: db._Sequelize.INTEGER,
             primaryKey: true,
