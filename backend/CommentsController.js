@@ -45,6 +45,7 @@ module.exports = {
                                         comment_id: comments_for_one_post[i].comment_id,
                                         message: comments_for_one_post[i].message,
                                         is_coded: checkUtil.isNotEmpty(comments_for_one_post[i].is_coded),
+                                        is_collapsed: false,
                                         sub_comments: []
                                     };
                                     createCommentTree(comments_for_one_post, comments_for_one_post[i].comment_id, comment);
@@ -204,6 +205,7 @@ function createCommentTree(postData, commentId, parentComment) {
                 comment_id: comment.comment_id,
                 message: comment.message,
                 is_coded: checkUtil.isNotEmpty(comment.is_coded),
+                is_collapsed: false,
                 sub_comments: []
             };
             parentComment.sub_comments[index] = subComment;

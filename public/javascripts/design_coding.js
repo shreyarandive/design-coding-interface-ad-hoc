@@ -92,6 +92,11 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
         $scope.getCommentCodingStatus();
     };
 
+    $scope.onCommentDoubleClickCollapseThread = function() {
+        $scope.selected_comment.is_collapsed = !($scope.selected_comment.is_collapsed);
+        console.log("Double Click!" + $scope.selected_comment.is_collapsed);
+    }
+
     $scope.getCommentCodingStatus = function() {
         $http({
             method: "GET",
