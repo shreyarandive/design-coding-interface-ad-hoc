@@ -111,27 +111,27 @@ module.exports = {
             let codes = req.body.answer_coding;
 
             const codesObj = {
-                        post_id: codes.post_id,
-                        comment_id: codes.comment_id,
-                        phatic: codes.phatic ? 1 : 0,
-                        issues_concern: codes.issues_concern ? 1 : 0,
-                        issues_concern_virtue_ethics: codes.issues_concern_virtue_ethics ? 1 : 0,
-                        issues_concern_consequentialist_ethics: codes.issues_concern_consequentialist_ethics ? 1 : 0,
-                        issues_concern_deontological_ethics: codes.issues_concern_deontological_ethics ? 1 : 0,
-                        proposed_remedy: codes.proposed_remedy ? 1 : 0,
-                        proposed_remedy_types_legal: codes.proposed_remedy_types_legal ? 1 : 0,
-                        proposed_remedy_types_shame: codes.proposed_remedy_types_shame ? 1 : 0,
-                        proposed_remedy_types_hack: codes.proposed_remedy_types_hack ? 1 : 0,
-                        proposed_remedy_directed_to_individual: codes.proposed_remedy_directed_to_individual ? 1 : 0,
-                        proposed_remedy_directed_to_society: codes.proposed_remedy_directed_to_society ? 1 : 0,
-                        modifiers: codes.modifiers ? 1 : 0,
-                        modifiers_extends: codes.modifiers_extends ? 1 : 0,
-                        modifiers_example: codes.modifiers_example ? 1 : 0,
-                        modifiers_conditional: codes.modifiers_conditional ? 1 : 0,
-                        modifiers_disagree_counter: codes.modifiers_disagree_counter ? 1 : 0,
-                        modifiers_futuring: codes.modifiers_futuring ? 1 : 0,
-                        sub_level_conversational_shift: codes.sub_level_conversational_shift ? 1 : 0,
-                        code_notes: codes.code_notes
+                post_id: codes.post_id,
+                comment_id: codes.comment_id,
+                phatic: codes.phatic ? 1 : 0,
+                issues_concern: codes.issues_concern ? 1 : 0,
+                issues_concern_virtue_ethics: codes.issues_concern_virtue_ethics ? 1 : 0,
+                issues_concern_consequentialist_ethics: codes.issues_concern_consequentialist_ethics ? 1 : 0,
+                issues_concern_deontological_ethics: codes.issues_concern_deontological_ethics ? 1 : 0,
+                proposed_remedy: codes.proposed_remedy ? 1 : 0,
+                proposed_remedy_types_legal: codes.proposed_remedy_types_legal ? 1 : 0,
+                proposed_remedy_types_shame: codes.proposed_remedy_types_shame ? 1 : 0,
+                proposed_remedy_types_hack: codes.proposed_remedy_types_hack ? 1 : 0,
+                proposed_remedy_directed_to_individual: codes.proposed_remedy_directed_to_individual ? 1 : 0,
+                proposed_remedy_directed_to_society: codes.proposed_remedy_directed_to_society ? 1 : 0,
+                modifiers: codes.modifiers ? 1 : 0,
+                modifiers_extends: codes.modifiers_extends ? 1 : 0,
+                modifiers_example: codes.modifiers_example ? 1 : 0,
+                modifiers_conditional: codes.modifiers_conditional ? 1 : 0,
+                modifiers_disagree_counter: codes.modifiers_disagree_counter ? 1 : 0,
+                modifiers_futuring: codes.modifiers_futuring ? 1 : 0,
+                sub_level_conversational_shift: codes.sub_level_conversational_shift ? 1 : 0,
+                code_notes: codes.code_notes
             };
 
             Coding.bulkCreate([codesObj],
@@ -154,18 +154,18 @@ module.exports = {
                         'modifiers_futuring',
                         'sub_level_conversational_shift',
                         'code_notes']})
-            .then(coding => {
+                .then(coding => {
 
-                console.log("Added the codes for the coding " + coding);
-                res.send({status_code: 200})
-            })
-            .catch(err => {
-                console.log("Error adding the coding " + err);
-                res.send({
-                    status_code: 500,
-                    msg: 'Failed to add coding to DB ' + err
+                    console.log("Added the codes for the coding " + coding);
+                    res.send({status_code: 200})
                 })
-            });
+                .catch(err => {
+                    console.log("Error adding the coding " + err);
+                    res.send({
+                        status_code: 500,
+                        msg: 'Failed to add coding to DB ' + err
+                    })
+                });
         },
     },
 
@@ -285,17 +285,17 @@ function getClass(comment)
 
     if(comment.modifiers === 1)
     {
-        html_class += ' modifiers';
+        html_class += 'modifiers ';
     }
 
     if(comment.proposed_remedy === 1)
     {
-        html_class += ' remedy';
+        html_class += 'remedy ';
     }
 
     if(comment.sub_level_conversational_shift === 1)
     {
-        html_class += ' shift';
+        html_class += 'shift ';
     }
 
     return html_class;
