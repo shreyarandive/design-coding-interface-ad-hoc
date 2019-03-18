@@ -15,6 +15,11 @@ designCoding.config(function ($routeProvider, $locationProvider) {
                 templateUrl: '/partials/page_content.html',
                 controller: 'page_content'
             })
+        .when('/visual_content/:page',
+            {
+                templateUrl: '/partials/visual_analysis.html',
+                controller: 'visual_content'
+            })
         .otherwise({redirectTo: '/'});
 });
 
@@ -75,7 +80,7 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
             $scope.selected_id = post_data.all_comments[0].comment_id;
             $scope.post_id = post_data.post_id;
         }
-        $scope.getCommentCodingStatus();
+        $scope.getCodingForSelectedComment();
         $scope.post_data = post_data;
         $scope.answer_coding = defaultCodes;
         $scope.success = false;
@@ -89,7 +94,7 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
         $scope.selected_comment = comment;
         $scope.answer_coding = defaultCodes;
 
-        $scope.getCommentCodingStatus();
+        $scope.getCodingForSelectedComment();
     };
 
     $scope.onCommentDoubleClickCollapseThread = function() {
@@ -97,7 +102,7 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
         console.log("Double Click!" + $scope.selected_comment.is_collapsed);
     }
 
-    $scope.getCommentCodingStatus = function() {
+    $scope.getCodingForSelectedComment = function() {
         $http({
             method: "GET",
             url: '/get-status/' + $scope.selected_id,
@@ -159,5 +164,56 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
     $scope.showNextPage = function (nextPage) {
         console.log("Show next page " + nextPage);
         $window.location.href = "#/page_content/" + nextPage;
+    };
+});
+
+designCoding.controller('visual_content', function ($scope, $http, $window, $rootScope, $routeParams) {
+    console.log("Route params " + $routeParams.page);
+
+    const defaultCodes = {
+        post_id: -1,
+        comment_id: -1,
+        phatic: false,
+        issues_concern: false,
+        issues_concern_virtue_ethics: false,
+        issues_concern_consequentialist_ethics: false,
+        issues_concern_deontological_ethics: false,
+        proposed_remedy: false,
+        proposed_remedy_types_legal: false,
+        proposed_remedy_types_shame: false,
+        proposed_remedy_types_hack: false,
+        proposed_remedy_directed_to_individual: false,
+        proposed_remedy_directed_to_society: false,
+        modifiers: false,
+        modifiers_extends: false,
+        modifiers_example: false,
+        modifiers_conditional: false,
+        modifiers_disagree_counter: false,
+        modifiers_futuring: false,
+        sub_level_conversational_shift: false,
+        code_notes: ""
+    };
+
+    $scope.getVisualContent = function () {
+        $http({
+            method: "GET",
+            url: '/comment-analysis/' + $routeParams.page,
+            params: {},
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (response) {
+            console.log(JSON.stringify(response.data.post_data));
+            $scope.initVisualPageContent(response.data.post_data);
+        }, function (error) {
+            console.log("Error " + error);
+            $scope.error_msg = error;
+            $scope.error = true;
+        });
+    };
+
+    $scope.initVisualPageContent = function(post_data) {
+        $scope.post_data = post_data;
+        $scope.success = false;
+        $scope.error = false;
+        $scope.info = false;
     };
 });

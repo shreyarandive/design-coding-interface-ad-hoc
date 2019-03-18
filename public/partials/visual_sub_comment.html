@@ -1,0 +1,8 @@
+<ul ng-repeat="sub_comment in comment.sub_comments">
+    <div ng-class="sub_comment.visual_class">
+        <p ng-class="'alert child'">
+            {{ sub_comment.message }}
+        </p>
+    </div>
+    <div ng-init="comment = sub_comment;" ng-include="'partials/visual_sub_comment.html'"></div>
+</ul>

@@ -30,7 +30,9 @@ module.exports = {
                 .then(single_post => {
 
                     db.query("SELECT `comments_assholedesign_25`.`message`, `comments_assholedesign_25`.`post_id`, `comments_assholedesign_25`.`parent_id`, " +
-                        "`comments_assholedesign_25`.`comment_id`, `coding_assholedesign_25`.`comment_id` AS is_coded FROM `comments_assholedesign_25` LEFT JOIN `coding_assholedesign_25` " +
+                        "`comments_assholedesign_25`.`comment_id`, `coding_assholedesign_25`.`comment_id` AS is_coded, `coding_assholedesign_25`.`phatic`, " +
+                        "`coding_assholedesign_25`.`issues_concern`, `coding_assholedesign_25`.`proposed_remedy` , `coding_assholedesign_25`.`modifiers`," +
+                        "`coding_assholedesign_25`.`sub_level_conversational_shift` FROM `comments_assholedesign_25` LEFT JOIN `coding_assholedesign_25` " +
                         "ON `coding_assholedesign_25`.`comment_id` = `comments_assholedesign_25`.`comment_id` WHERE " +
                         "`comments_assholedesign_25`.`post_id` = \"" + single_post.post_id + "\"", {type: db.QueryTypes.SELECT})
 
@@ -45,8 +47,9 @@ module.exports = {
                                         comment_id: comments_for_one_post[i].comment_id,
                                         message: comments_for_one_post[i].message,
                                         is_coded: checkUtil.isNotEmpty(comments_for_one_post[i].is_coded),
+                                        sub_comments: [],
                                         is_collapsed: false,
-                                        sub_comments: []
+                                        visual_class: getClass(comments_for_one_post[i])
                                     };
                                     createCommentTree(comments_for_one_post, comments_for_one_post[i].comment_id, comment);
                                     comments[index] = comment;
@@ -206,7 +209,8 @@ function createCommentTree(postData, commentId, parentComment) {
                 message: comment.message,
                 is_coded: checkUtil.isNotEmpty(comment.is_coded),
                 is_collapsed: false,
-                sub_comments: []
+                sub_comments: [],
+                visual_class: getClass(comment)
             };
             parentComment.sub_comments[index] = subComment;
             index++;
@@ -263,4 +267,36 @@ function getCodingAnswersForUI(codingResponse, commentId) {
     }
 
     return defaultCoding;
+}
+
+function getClass(comment)
+{
+    let html_class = ''
+
+    if(comment.phatic === 1)
+    {
+        html_class += 'phatic '
+    }
+
+    if(comment.issues_concern === 1)
+    {
+        html_class += 'issues '
+    }
+
+    if(comment.modifiers === 1)
+    {
+        html_class += ' modifiers';
+    }
+
+    if(comment.proposed_remedy === 1)
+    {
+        html_class += ' remedy';
+    }
+
+    if(comment.sub_level_conversational_shift === 1)
+    {
+        html_class += ' shift';
+    }
+
+    return html_class;
 }

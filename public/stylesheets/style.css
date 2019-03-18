@@ -182,4 +182,23 @@ input{
   border-left: solid red 2px;
 }
 
+.issues {
+  background-color: red;
+}
+
+.modifiers {
+  background-color: pink;
+}
+
+.remedy {
+  background-color: yellow;
+}
+
+.phatic {
+  background-color: blue;
+}
+
+.shift {
+  background-color: green;
+}
 /*/
