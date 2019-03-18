@@ -1,4 +1,4 @@
-# design-coding-interface
+# design-coding-interface-ad-hoc
 
 ### Steps to run the tool on localhost:3000
 
