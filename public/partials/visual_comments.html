@@ -1,8 +1,6 @@
 <div ng-repeat="comment in post_data.all_comments"><p></p>
     <div ng-class="comment.visual_class">
-        <p ng-class="'alert parent'">
-            {{ comment.message }}
-        </p>
+            <span class="tooltip">{{ comment.message }}</span>
     </div>
-    <div ng-include="'partials/visual_sub_comment.html'"></div>
+    <ul ng-include="'partials/visual_sub_comment.html'"></ul>
 </div>

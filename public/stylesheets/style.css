@@ -182,6 +182,32 @@ input{
   border-left: solid red 2px;
 }
 
+
+.visual .ng-scope {
+    float: left;
+    display: inline-block;
+}
+
+.visual ul, .visual li {
+    float: left;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.issues, .modifiers, .remedy, .phatic, .shift {
+    width: 1em;
+    height: 1em;
+    float: left;
+    position: relative;
+    display: inline-block;
+}
+
+.issues span, .modifiers span, .remedy span, .phatic span, .shift span {
+    display: none;
+}
+
 .issues {
   background-color: red;
 }
