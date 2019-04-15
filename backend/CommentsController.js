@@ -194,6 +194,88 @@ module.exports = {
                 })
             });
         },
+    },
+
+    getAllPostData: {
+        get: function (req, res)
+        {
+            Post.findAll()
+
+                .then(all_posts => {
+
+                    let postArray = [];
+                    for(let j = 0 ; j < all_posts.length ; j++) {
+                        db.query("SELECT `comments_assholedesign_25`.`message`, `comments_assholedesign_25`.`post_id`, `comments_assholedesign_25`.`parent_id`, " +
+                            "`comments_assholedesign_25`.`comment_id`, `coding_assholedesign_25`.`comment_id` AS is_coded, `coding_assholedesign_25`.`phatic`, " +
+                            "`coding_assholedesign_25`.`issues_concern`, `coding_assholedesign_25`.`proposed_remedy` , `coding_assholedesign_25`.`modifiers`," +
+                            "`coding_assholedesign_25`.`sub_level_conversational_shift` FROM `comments_assholedesign_25` LEFT JOIN `coding_assholedesign_25` " +
+                            "ON `coding_assholedesign_25`.`comment_id` = `comments_assholedesign_25`.`comment_id` WHERE " +
+                            "`comments_assholedesign_25`.`post_id` = \"" + all_posts[j].post_id + "\"", {type: db.QueryTypes.SELECT})
+
+                            .then(comments_for_one_post => {
+
+                                let i;
+                                let comments = [];
+                                let index = 0;
+                                for (i = 0; comments_for_one_post[i] != null; i++) {
+                                    if (comments_for_one_post[i].post_id === comments_for_one_post[i].parent_id) {
+                                        let comment = {
+                                            comment_id: comments_for_one_post[i].comment_id,
+                                            message: comments_for_one_post[i].message,
+                                            is_coded: checkUtil.isNotEmpty(comments_for_one_post[i].is_coded),
+                                            sub_comments: [],
+                                            is_collapsed: false,
+                                            visual_class: getClass(comments_for_one_post[i])
+                                        };
+                                        createCommentTree(comments_for_one_post, comments_for_one_post[i].comment_id, comment);
+                                        comments[index] = comment;
+                                        index++;
+                                    }
+                                }
+
+                                totalComments = i;
+
+                                let posts = {
+                                    post_id: all_posts[j].post_id,
+                                    total_comments: totalComments,
+                                    total_posts: totalPosts,
+                                    post_link: "https://www.reddit.com/" + all_posts.permalink,
+                                    all_comments: comments
+                                };
+
+                                postArray.push(posts);
+
+                                if (j === all_posts.length - 1)
+                                {
+                                    res.send({post_data: postArray});
+                                }
+
+                            })
+
+                            .catch(err => {
+
+                                console.log("Error Comments: " + err);
+
+                                let response = {
+                                    status_code: 500,
+                                    msg: 'comment fetching error'
+                                };
+
+                                res.send(response);
+                            });
+                    }
+                })
+
+                .catch(err => {
+                    console.log("Error post " + err);
+                    let response = {
+                        status_code: 500,
+                        msg: 'fetching post error'
+                    };
+
+                    res.send(response);
+                });
+        }
     }
 };
 

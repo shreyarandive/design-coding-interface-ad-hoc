@@ -1,0 +1,4 @@
+<div ng-repeat="sub_comment in comment.sub_comments">
+    <div ng-class="sub_comment.visual_class"></div>
+    <div ng-init="comment = sub_comment;" ng-include="'partials/sequence_sub.html'"></div>
+</div>

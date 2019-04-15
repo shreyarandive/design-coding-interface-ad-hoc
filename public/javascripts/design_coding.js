@@ -20,6 +20,11 @@ designCoding.config(function ($routeProvider, $locationProvider) {
                 templateUrl: '/partials/visual_analysis.html',
                 controller: 'visual_content'
             })
+        .when('/sequence_content',
+            {
+                templateUrl: 'partials/sequence_content.html',
+                controller: 'sequence_content'
+            })
         .otherwise({redirectTo: '/'});
 });
 
@@ -211,6 +216,33 @@ designCoding.controller('visual_content', function ($scope, $http, $window, $roo
     };
 
     $scope.initVisualPageContent = function(post_data) {
+        $scope.post_data = post_data;
+        $scope.success = false;
+        $scope.error = false;
+        $scope.info = false;
+    };
+});
+
+designCoding.controller('sequence_content', function ($scope, $http, $window, $rootScope, $routeParams) {
+    console.log("Route params " + $routeParams.page);
+
+    $scope.getSequenceContent = function () {
+        $http({
+            method: "GET",
+            url: '/sequence-analysis',
+            params: {},
+            headers: {'Content-Type': 'application/json'}
+        }).then(function(response) {
+            console.log(JSON.stringify(response.data.post_data));
+            $scope.initSequenceContent(response.data.post_data);
+        }, function (error) {
+            console.log("Error " + error);
+            $scope.error_msg = error;
+            $scope.error = true;
+        });
+    };
+
+    $scope.initSequenceContent = function(post_data) {
         $scope.post_data = post_data;
         $scope.success = false;
         $scope.error = false;

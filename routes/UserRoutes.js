@@ -12,5 +12,6 @@ router.get('/comment-analysis/:page_count', Controller.loadMainPage.get);
 router.post('/submit-coding', Controller.submitCoding.post);
 router.get('/get-status/:comment_id', Controller.getStatus.get);
 router.get('/visual-analysis/:page_count', Controller.loadMainPage.get);
+router.get('/sequence-analysis', Controller.getAllPostData.get);
 
 module.exports = router;
