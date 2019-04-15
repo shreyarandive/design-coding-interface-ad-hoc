@@ -20,10 +20,10 @@ designCoding.config(function ($routeProvider, $locationProvider) {
                 templateUrl: '/partials/visual_analysis.html',
                 controller: 'visual_content'
             })
-        .when('/sequence_content',
+        .when('/sequence_analysis',
             {
                 templateUrl: 'partials/sequence_content.html',
-                controller: 'sequence_content'
+                controller: 'sequence_analysis'
             })
         .otherwise({redirectTo: '/'});
 });
@@ -223,7 +223,7 @@ designCoding.controller('visual_content', function ($scope, $http, $window, $roo
     };
 });
 
-designCoding.controller('sequence_content', function ($scope, $http, $window, $rootScope, $routeParams) {
+designCoding.controller('sequence_analysis', function ($scope, $http, $window, $rootScope, $routeParams) {
     console.log("Route params " + $routeParams.page);
 
     $scope.getSequenceContent = function () {
