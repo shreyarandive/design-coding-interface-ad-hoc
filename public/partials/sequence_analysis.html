@@ -1,0 +1,6 @@
+<div ng-repeat="post in post_data"><br>
+    <div ng-repeat="comment in post.all_comments">
+        <div ng-class="comment.visual_class"></div>
+        <div ng-include="'partials/sequence_sub.html'"></div>
+    </div>
+</div>
