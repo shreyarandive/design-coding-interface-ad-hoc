@@ -10,17 +10,17 @@ designCoding.config(function ($routeProvider, $locationProvider) {
                 templateUrl: '/partials/home.html',
                 controller: 'home'
             })
-        .when('/page_content/:page',
+        .when('/page-content/:page',
             {
                 templateUrl: '/partials/page_content.html',
                 controller: 'page_content'
             })
-        .when('/visual_content/:page',
+        .when('/visual-content/:page',
             {
                 templateUrl: '/partials/visual_analysis.html',
                 controller: 'visual_content'
             })
-        .when('/sequence_analysis',
+        .when('/sequence-analysis',
             {
                 templateUrl: 'partials/sequence_content.html',
                 controller: 'sequence_analysis'
@@ -32,7 +32,7 @@ designCoding.controller('home', function ($scope, $http, $window) {
     $scope.title = "#ashdesign coding";
 
     $scope.onStartClick = function () {
-        $window.location.href = "#/page_content/0";
+        $window.location.href = "#/page-content/0";
     };
 });
 
@@ -163,12 +163,12 @@ designCoding.controller('page_content', function ($scope, $http, $window, $rootS
 
     $scope.showPrevPage = function (prevPage) {
         console.log("Show prev page " + prevPage);
-        $window.location.href = "#/page_content/" + prevPage;
+        $window.location.href = "#/page-content/" + prevPage;
     };
 
     $scope.showNextPage = function (nextPage) {
         console.log("Show next page " + nextPage);
-        $window.location.href = "#/page_content/" + nextPage;
+        $window.location.href = "#/page-content/" + nextPage;
     };
 });
 
