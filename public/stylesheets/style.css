@@ -201,10 +201,12 @@ input{
     float: left;
     position: relative;
     display: inline-block;
+	margin-right: 1px;
 }
 
 .issues span, .modifiers span, .remedy span, .phatic span, .shift span {
     display: none;
+   
 }
 
 .issues {
@@ -212,17 +214,40 @@ input{
 }
 
 .modifiers {
-  background-color: pink;
-}
-
-.remedy {
   background-color: yellow;
 }
 
-.phatic {
+.remedy {
   background-color: blue;
 }
 
+.phatic {
+  background-color: gray;
+}
+
 .shift {
-  background-color: green;
+  border-right: 2px solid black;
+}
+
+.issues.remedy {
+	border-top: 7px solid red;
+	background-color: blue;
+}
+.issues.modifiers {
+	border-top: 7px solid red;
+	background-color: yellow;
+}
+.remedy.modifiers {
+	border-top: 7px solid blue;
+	background-color: yellow;
+}
+.issues.remedy.modifiers {
+	border-top: 4px solid red;
+	border-bottom: 4px solid blue;
+	background-color: yellow;
+}
+
+
+.sequence-row {
+	margin-bottom: 1em;
 }
