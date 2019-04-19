@@ -127,7 +127,7 @@ input{
 }
 
 .row.with-margin{
-  margin: 10px -70px;
+  margin: 40px 40px;
 }
 
 .scrollable_div{
@@ -178,7 +178,7 @@ input{
   padding-left: 20px;
 }
 
-.is-coded {
+.is-coded li{
   border-left: solid red 2px;
 }
 
