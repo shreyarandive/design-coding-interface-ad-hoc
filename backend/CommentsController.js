@@ -48,6 +48,7 @@ module.exports = {
                                         message: comments_for_one_post[i].message,
                                         is_coded: checkUtil.isNotEmpty(comments_for_one_post[i].is_coded),
                                         sub_comments: [],
+                                        size: 0,
                                         is_collapsed: false,
                                         visual_class: getClass(comments_for_one_post[i])
                                     };
@@ -56,7 +57,6 @@ module.exports = {
                                     index++;
                                 }
                             }
-
                             totalComments = i;
 
                             let postData = {
@@ -224,6 +224,7 @@ module.exports = {
                                             message: comments_for_one_post[i].message,
                                             is_coded: checkUtil.isNotEmpty(comments_for_one_post[i].is_coded),
                                             sub_comments: [],
+                                            size: 0,
                                             is_collapsed: false,
                                             visual_class: getClass(comments_for_one_post[i])
                                         };
@@ -292,6 +293,7 @@ function createCommentTree(postData, commentId, parentComment) {
                 is_coded: checkUtil.isNotEmpty(comment.is_coded),
                 is_collapsed: false,
                 sub_comments: [],
+                size: 0,
                 visual_class: getClass(comment)
             };
             parentComment.sub_comments[index] = subComment;
@@ -299,6 +301,8 @@ function createCommentTree(postData, commentId, parentComment) {
             createCommentTree(postData, comment.comment_id, subComment);
         }
     }
+
+    parentComment.size = index;
 }
 
 function getCodingAnswersForUI(codingResponse, commentId) {
