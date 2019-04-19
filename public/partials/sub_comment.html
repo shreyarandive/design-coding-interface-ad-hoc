@@ -1,10 +1,8 @@
-<ul ng-repeat="sub_comment in comment.sub_comments">
-    <div ng-class="{true: 'is-coded'}[sub_comment.is_coded]">
-        <p ng-class="{true: 'alert child active_background', false: 'alert child'}[sub_comment.comment_id === selected_id]"
-           ng-click="onCommentClick(sub_comment)"
-           ng-dblclick="onCommentDoubleClickCollapseThread()">
-            {{ sub_comment.message }}
-        </p>
-    </div>
-    <div ng-init="comment = sub_comment;" ng-if="sub_comment.is_collapsed === false" ng-include="'partials/sub_comment.html'" ></div>
+<ul ng-repeat="sub_comment in comment.sub_comments" ng-class="{true: 'is-coded'}[sub_comment.is_coded]">
+    <li ng-class="{true: 'alert child active_background', false: 'alert child'}[sub_comment.comment_id === selected_id]"
+        ng-click="onCommentClick(sub_comment)"
+        ng-dblclick="onCommentDoubleClickCollapseThread()">
+        {{ sub_comment.message }}
+    </li>
+    <p ng-init="comment = sub_comment;" ng-if="sub_comment.size !== 0" ng-include="'partials/sub_comment.html'" ></p>
 </ul>
