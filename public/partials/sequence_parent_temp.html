@@ -1,0 +1,6 @@
+<ul ng-repeat="post in post_data" class="sequence-row">
+    <li ng-repeat="comment in post.all_comments" ng-class="comment.visual_class" >
+
+        <span ng-if="comment.size !== 0" ng-include="'partials/sequence_child_temp.html'"></span>
+    </li>
+</ul>
