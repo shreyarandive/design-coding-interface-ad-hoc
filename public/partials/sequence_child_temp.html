@@ -1,0 +1,8 @@
+<li ng-repeat="sub_comment in comment.sub_comments"
+    ng-class="sub_comment.visual_class">
+
+    <span ng-if="sub_comment.size !== 0"
+        ng-init="comment = sub_comment"
+        ng-include="'partials/sequence_child_temp.html'">
+    </span>
+</li>
