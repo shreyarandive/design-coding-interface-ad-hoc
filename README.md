@@ -46,3 +46,8 @@ Troubleshooting:
 **Running the tool**  
 1. Run ```npm start```    
 2. Open any browser and go to the url http://localhost:3000
+
+
+### Gif showing the webtool in action
+
+![](gifs/demo.gif) 
