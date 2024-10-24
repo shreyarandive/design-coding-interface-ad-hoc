@@ -27,6 +27,7 @@ CREATE TABLE `comments_assholedesign_25` (
   `post_id` varchar(25) NOT NULL,
   `parent_id` text NOT NULL,
   `comment_id` text NOT NULL,
+  `comment_index` int(11) NOT NULL DEFAULT 0,
   `comment_date` datetime NOT NULL,
   `author` varchar(255) NOT NULL,
   `message` text NOT NULL,
