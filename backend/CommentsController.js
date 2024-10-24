@@ -30,7 +30,7 @@ module.exports = {
                 .then(single_post => {
 
                     db.query("SELECT `comments_assholedesign_25`.`message`, `comments_assholedesign_25`.`post_id`, `comments_assholedesign_25`.`parent_id`, " +
-                        "`comments_assholedesign_25`.`comment_id`, `coding_assholedesign_25`.`comment_id` AS is_coded, `coding_assholedesign_25`.`phatic`, " +
+                        "`comments_assholedesign_25`.`comment_id`, `comments_assholedesign_25`.`comment_index`, `coding_assholedesign_25`.`comment_id` AS is_coded, `coding_assholedesign_25`.`phatic`, " +
                         "`coding_assholedesign_25`.`issues_concern`, `coding_assholedesign_25`.`proposed_remedy` , `coding_assholedesign_25`.`modifiers`," +
                         "`coding_assholedesign_25`.`sub_level_conversational_shift` FROM `comments_assholedesign_25` LEFT JOIN `coding_assholedesign_25` " +
                         "ON `coding_assholedesign_25`.`comment_id` = `comments_assholedesign_25`.`comment_id` WHERE " +
@@ -46,6 +46,7 @@ module.exports = {
                                     let comment = {
                                         comment_id: comments_for_one_post[i].comment_id,
                                         message: comments_for_one_post[i].message,
+                                        comment_index: comments_for_one_post[i].comment_index,
                                         is_coded: checkUtil.isNotEmpty(comments_for_one_post[i].is_coded),
                                         sub_comments: [],
                                         size: 0,
@@ -221,6 +222,7 @@ module.exports = {
                                     if (comments_for_one_post[i].post_id === comments_for_one_post[i].parent_id) {
                                         let comment = {
                                             comment_id: comments_for_one_post[i].comment_id,
+                                            comment_index: comments_for_one_post[i].comment_index,
                                             message: comments_for_one_post[i].message,
                                             is_coded: checkUtil.isNotEmpty(comments_for_one_post[i].is_coded),
                                             sub_comments: [],
@@ -277,18 +279,20 @@ module.exports = {
                     res.send(response);
                 });
         }
-    }
+    },
 };
 
 
-function createCommentTree(postData, commentId, parentComment) {
+function createCommentTree(postData, commentId, parentComment, depth = 0) {
     let index = 0;
+    depth++;
     for (let i = 0; postData[i] != null; i++) {
         let comment = postData[i];
-
         if (comment.parent_id.includes(commentId)) {
+            db.query("UPDATE comments_assholedesign_25 SET comment_index = '"+depth+"' WHERE comment_id = '"+comment.comment_id+"'");
             let subComment = {
                 comment_id: comment.comment_id,
+                comment_index: depth,
                 message: comment.message,
                 is_coded: checkUtil.isNotEmpty(comment.is_coded),
                 is_collapsed: false,
@@ -298,7 +302,7 @@ function createCommentTree(postData, commentId, parentComment) {
             };
             parentComment.sub_comments[index] = subComment;
             index++;
-            createCommentTree(postData, comment.comment_id, subComment);
+            createCommentTree(postData, comment.comment_id, subComment, depth);
         }
     }
 

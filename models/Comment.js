@@ -33,6 +33,10 @@ let Comment = db.define('comments_assholedesign_25', {
             type: db._Sequelize.STRING,
             allowNull: false
         },
+        comment_index: {
+            type: db._Sequelize.INTEGER,
+            allowNull: true
+        },
         comment_date: {
             type: db._Sequelize.DATE,
             allowNull: false

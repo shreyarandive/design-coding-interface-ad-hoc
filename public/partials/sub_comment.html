@@ -2,7 +2,7 @@
     <li ng-class="{true: 'alert child active_background', false: 'alert child'}[sub_comment.comment_id === selected_id]"
         ng-click="onCommentClick(sub_comment)"
         ng-dblclick="onCommentDoubleClickCollapseThread()">
-        {{ sub_comment.message }}
+        {{ sub_comment.message }} {{ sub_comment.comment_index}}
     </li>
     <p ng-init="comment = sub_comment;" ng-if="sub_comment.size !== 0" ng-include="'partials/sub_comment.html'" ></p>
 </ul>
